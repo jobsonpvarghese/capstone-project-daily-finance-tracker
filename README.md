@@ -9,7 +9,9 @@ A mobile application built using React Native that helps individuals track their
 - Dwijen Girish Rathod
 
 # Features
-- Add, Edit & delete expenses
+- Add expense
+- Edit expense
+- Delete expense
 - Add tag
 - Add note
 - Monthly report
@@ -17,6 +19,8 @@ A mobile application built using React Native that helps individuals track their
 - Give colours to tag
 - Set expense repeat periodically
 - Show graph and report
+- Report a bug
+- Dark Theme
 
 # Specs
 - This project will be built using React Native, Expo and TypeScript
