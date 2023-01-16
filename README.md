@@ -1,6 +1,6 @@
 
 # Capstone Project (Daily Finance Tracker)
-A mobile application built using React Native that helps individuals track their daily finances. Users can input their income, expenses, and savings, and the app will provide them with a clear overview of their financial situation. The app also offers useful features such as budgeting tools, spending analysis, and financial goal tracking to help users make informed decisions about their money. The user-friendly interface allows for easy navigation and data entry, making it simple for users to stay on top of their finances on the go.
+A mobile application built using React Native that helps individuals track their daily finances. Users can input their expenses and the app will provide them with a clear overview of their financial situation. The app also offers useful features such as budgeting tools, spending analysis, and financial goal tracking to help users make informed decisions about their money. The user-friendly interface allows for easy navigation and data entry, making it simple for users to stay on top of their finances on the go.
 
 # Team (Group 7)
 - Hitarth Barthkumar Kakkad
