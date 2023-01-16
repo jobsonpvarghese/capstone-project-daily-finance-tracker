@@ -9,8 +9,7 @@ A mobile application built using React Native that helps individuals track their
 - Dwijen Girish Rathod
 
 # Features
-- Add expense
-- Delete expense
+- Add & delete expenses
 - Edit expense
 - Add tag
 - Add note
