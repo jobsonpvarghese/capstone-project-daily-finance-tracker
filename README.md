@@ -23,7 +23,7 @@ A mobile application built using React Native that helps individuals track their
 - Dark Theme
 
 # Specs
-- This project will be built using React Native, Expo and TypeScript
+- This project will be built using React Native - CLI and TypeScript
 - User itself is the source of data.
 - This application targets both android as well as iOS platforms.
 - In this application, the users can add their own tags to sort out their daily expense.
