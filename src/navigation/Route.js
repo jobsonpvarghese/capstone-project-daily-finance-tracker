@@ -9,6 +9,7 @@ import Tabs from "./Tabs"
 
 // Stack Navigator
 const Stack = createNativeStackNavigator()
+import { route } from "./PageRoutes"
 
 export default function Route() {
   return (
@@ -22,13 +23,18 @@ export default function Route() {
               headerShown: false
             }}
           />
-          <Stack.Screen
-            name="Details"
-            component={Detail}
-            options={{
-              headerShown: false
-            }}
-          />
+          {route.map((item, index) => {
+            return (
+              <Stack.Screen
+                key={index}
+                name={item.name}
+                component={item.component}
+                options={{
+                  headerShown: false
+                }}
+              />
+            )
+          })}
         </Stack.Navigator>
       </NavigationContainer>
     </>
