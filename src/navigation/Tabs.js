@@ -7,6 +7,7 @@ import { Ionicons } from "react-native-vector-icons"
 import Home from "../screens/Home"
 import Account from "../screens/Account"
 import Settings from "../screens/Settings"
+import Add from "../screens/Add"
 
 // Tab Navigator
 const Tab = createBottomTabNavigator()
@@ -16,7 +17,7 @@ const Tabs = () => {
     <Tab.Navigator>
       <Tab.Screen name="Home" component={Home} options={styles.home} />
       <Tab.Screen name="Expenses" component={Account} options={styles.account} />
-      <Tab.Screen name="Add" component={Settings} options={styles.setting} />
+      <Tab.Screen name="Add" component={Add} options={styles.Add} />
       <Tab.Screen name="Settings" component={Settings} options={styles.setting} />
     </Tab.Navigator>
   )
@@ -41,6 +42,16 @@ const styles = StyleSheet.create({
       const { focused, color, size } = props
       const iconName = focused ? "card-account-details" : "card-account-details-outline"
       return <MaterialCommunityIcons name={iconName} color={color} size={size} />
+    }
+  },
+
+  Add: {
+    tabBarActiveTintColor: "#1D1CE5",
+    tabBarInactiveTintColor: "gray",
+    tabBarIcon: props => {
+      const { focused, color, size } = props
+      const iconName = focused ? "add" : "add-outline"
+      return <Ionicons name={iconName} color={color} size={size} />
     }
   },
   setting: {
