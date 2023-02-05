@@ -5,7 +5,7 @@ import { Ionicons } from "react-native-vector-icons"
 
 // Screen Import
 import Home from "../screens/Home"
-import Account from "../screens/Account"
+import Expenses from "../screens/Expenses"
 import Settings from "../screens/Settings"
 import Add from "../screens/Add"
 
@@ -15,10 +15,10 @@ const Tab = createBottomTabNavigator()
 const Tabs = () => {
   return (
     <Tab.Navigator>
-      <Tab.Screen name="Home" component={Home} options={styles.home} />
-      <Tab.Screen name="Expenses" component={Account} options={styles.account} />
-      <Tab.Screen name="Add" component={Add} options={styles.Add} />
-      <Tab.Screen name="Settings" component={Settings} options={styles.setting} />
+      <Tab.Screen name="Home" component={Home} options={{ ...styles.home, ...styles.tabBarStyle, headerShown: false }} />
+      <Tab.Screen name="Expenses" component={Expenses} options={{ ...styles.Expenses, ...styles.tabBarStyle, headerShown: false }} />
+      <Tab.Screen name="Add" component={Add} options={{ ...styles.Add, ...styles.tabBarStyle, headerShown: false }} />
+      <Tab.Screen name="Settings" component={Settings} options={{ ...styles.setting, ...styles.tabBarStyle, headerShown: false }} />
     </Tab.Navigator>
   )
 }
@@ -26,18 +26,27 @@ const Tabs = () => {
 export default Tabs
 
 const styles = StyleSheet.create({
+  tabBarStyle: {
+    tabBarActiveTintColor: "#FCE22A",
+    tabBarInactiveTintColor: "white",
+
+    tabBarStyle: {
+      backgroundColor: "#F94A29",
+      borderTopColor: "#F94A29",
+      borderTopWidth: 0,
+      height: 80,
+      paddingBottom: 20,
+      paddingTop: 10
+    }
+  },
   home: {
-    tabBarActiveTintColor: "#1D1CE5",
-    tabBarInactiveTintColor: "gray",
     tabBarIcon: props => {
       const { focused, color, size } = props
       const iconName = focused ? "home" : "home-outline"
       return <MaterialCommunityIcons name={iconName} color={color} size={size} />
     }
   },
-  account: {
-    tabBarActiveTintColor: "#1D1CE5",
-    tabBarInactiveTintColor: "gray",
+  Expenses: {
     tabBarIcon: props => {
       const { focused, color, size } = props
       const iconName = focused ? "card-account-details" : "card-account-details-outline"
@@ -46,8 +55,6 @@ const styles = StyleSheet.create({
   },
 
   Add: {
-    tabBarActiveTintColor: "#1D1CE5",
-    tabBarInactiveTintColor: "gray",
     tabBarIcon: props => {
       const { focused, color, size } = props
       const iconName = focused ? "add" : "add-outline"
@@ -55,8 +62,6 @@ const styles = StyleSheet.create({
     }
   },
   setting: {
-    tabBarActiveTintColor: "#1D1CE5",
-    tabBarInactiveTintColor: "gray",
     tabBarIcon: props => {
       const { focused, color, size } = props
       const iconName = focused ? "settings" : "settings-outline"

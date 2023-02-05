@@ -1,11 +1,11 @@
 import React from "react"
 import { StyleSheet, Text, View } from "react-native"
 
-const Account = () => {
+const Expenses = () => {
   return (
     <View style={styles.container}>
       <Text>
-        Content for the <Text style={styles.bold}>account</Text> component goes here.
+        Content for the <Text style={styles.bold}>Expenses</Text> component goes here.
       </Text>
     </View>
   )
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Account
+export default Expenses

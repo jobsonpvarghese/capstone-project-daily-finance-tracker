@@ -22,7 +22,13 @@ export default function Route() {
               headerShown: false
             }}
           />
-          <Stack.Screen name="Details" component={Detail} />
+          <Stack.Screen
+            name="Details"
+            component={Detail}
+            options={{
+              headerShown: false
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
