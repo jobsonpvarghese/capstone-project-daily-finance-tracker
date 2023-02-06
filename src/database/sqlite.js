@@ -2,7 +2,7 @@ import * as SQLite from "expo-sqlite"
 
 // Open the database
 export const dbInit = () => {
-  const db = SQLite.openDatabase("gamelist.db")
+  const db = SQLite.openDatabase("category.db")
 
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -22,7 +22,7 @@ export const dbInit = () => {
 
 // Insert a game into the database
 export const dbGetGames = () => {
-  const db = SQLite.openDatabase("gamelist.db")
+  const db = SQLite.openDatabase("category.db")
 
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -45,7 +45,7 @@ export const dbGetGames = () => {
 
 // Insert a game into the database
 export const dbInsert = (id, game) => {
-  const db = SQLite.openDatabase("gamelist.db")
+  const db = SQLite.openDatabase("category.db")
 
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -65,7 +65,7 @@ export const dbInsert = (id, game) => {
 
 // Delete a game from the database
 export const dbDelete = id => {
-  const db = SQLite.openDatabase("gamelist.db")
+  const db = SQLite.openDatabase("category.db")
 
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -85,7 +85,7 @@ export const dbDelete = id => {
 
 // Dlete all games from the database
 export const dbDeleteAll = () => {
-  const db = SQLite.openDatabase("gamelist.db")
+  const db = SQLite.openDatabase("category.db")
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
@@ -104,7 +104,7 @@ export const dbDeleteAll = () => {
 
 // Drop the games table
 export const dropTable = () => {
-  const db = SQLite.openDatabase("gamelist.db")
+  const db = SQLite.openDatabase("category.db")
 
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
