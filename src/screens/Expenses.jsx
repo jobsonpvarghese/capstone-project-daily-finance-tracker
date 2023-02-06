@@ -1,6 +1,6 @@
 import React from "react"
-import { StyleSheet, Text, View } from "react-native"
-import { FAB } from "react-native-paper"
+import {StyleSheet, Text, View } from "react-native"
+import { FAB, Button } from "react-native-paper"
 
 const Expenses = props => {
   const { navigation } = props
@@ -10,7 +10,9 @@ const Expenses = props => {
       <Text>
         Content for the <Text style={styles.bold}>Expenses</Text> component goes here.
       </Text>
-      <FAB icon="plus" style={styles.fab} color="#FCE22A" size={"small"} onPress={() => navigation.navigate("ExpenseForm")} />
+      <Button icon="plus" style={styles.fab} textColor="#FFF" onPress={() => navigation.navigate("ExpenseForm")} >
+        Add Expense
+      </Button>
     </View>
   )
 }

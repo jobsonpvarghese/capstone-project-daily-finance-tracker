@@ -19,6 +19,7 @@ const ExpenseFrom = props => {
       </Text>
       <TextInput mode="outlined" label="Expense Title" placeholder="Enter you expense label" />
       <TextInput mode="outlined" label="Amount" placeholder="$" />
+      <TextInput mode="outlined" label="Enter the tag" placeholder=" " />
       <View style={styles.btnArea}>
         <Button style={{ borderColor: "#F94A29" }} icon="close" textColor="#F94A29" mode="outlined" onPress={() => navigation.navigate("Expenses")}>
           Cancel
