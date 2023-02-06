@@ -1,5 +1,5 @@
 import React from "react"
-import { View, Text, ScrollView, TouchableOpacity, Alert,StyleSheet } from "react-native"
+import { View, Text, ScrollView, TouchableOpacity, Alert, StyleSheet } from "react-native"
 import form from "../styles/Form.js"
 
 // db functions
@@ -25,10 +25,31 @@ const TagList = props => {
     )
   }
 
-  // Delete all tags
-  
+  // Delete all tag
+  const deleteAll = () => {
+    AlertDialog("Delete All", "Are you sure you want to delete all category?", () => {
+      dbDeleteAll()
+        .then(() => {
+          refreshVal()
+        })
+        .catch(err => {
+          console.log("Error", err)
+        })
+    })
+  }
 
   // Delete single tag
+  const deleteData = id => {
+    AlertDialog("Delete", "Are you sure you want to delete this category?", () => {
+      dbDelete(id)
+        .then(() => {
+          refreshVal()
+        })
+        .catch(err => {
+          console.log("Error", err)
+        })
+    })
+  }
 
 
   return (
@@ -50,15 +71,20 @@ const TagList = props => {
                     {game?.game}
                   </Text>
                 </View>
+
                 <View>
-                  {/* Delete single tag here */}
+                  <TouchableOpacity onPress={() => deleteData(game.id)}>
+                    <Text style={form.deleteButton}>Delete</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             </View>
           ))
         )}
       </ScrollView>
-      {/* Delete all btn here */}
+      <TouchableOpacity style={form.deleteAllDiv} onPress={deleteAll} disabled={data == "" ? true : false}>
+        <Text style={form.deleteAll}>Delete All</Text>
+      </TouchableOpacity>
     </View>
   )
 }
