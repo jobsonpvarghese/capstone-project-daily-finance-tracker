@@ -3,7 +3,6 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-nati
 import { FAB, Button } from "react-native-paper"
 import form from "../styles/Form.js"
 
-
 // database functions
 import { dbInitExpense, dbGetExpenses } from "../database/sqlite"
 
@@ -11,30 +10,30 @@ const Expenses = props => {
   const { navigation } = props
   const [data, setData] = useState([])
 
-// Refresh data
-const refreshVal = () => {
-  dbGetexpenses().then(data => {
-    setData(data)
-  })
-}
-
-// Init db
-useEffect(() => {
-  dbInitExpense()
-    .then(() => dbGetExpenses())
-    .then(data => {
+  // Refresh data
+  const refreshVal = () => {
+    dbGetexpenses().then(data => {
       setData(data)
-      console.log("Data", data)
     })
-    .catch(err => {
-      console.log("Databae error", err)
-    })
-    .finally(() => {
-      console.log("Database initialized")
-    })
+  }
 
-  console.log("Effect")
-}, [])
+  // Init db
+  useEffect(() => {
+    dbInitExpense()
+      .then(() => dbGetExpenses())
+      .then(data => {
+        setData(data)
+        console.log("Data", data)
+      })
+      .catch(err => {
+        console.log("Databae error", err)
+      })
+      .finally(() => {
+        console.log("Database initialized")
+      })
+
+    console.log("Effect")
+  }, [])
 
   return (
     <View style={styles.container}>
@@ -57,20 +56,10 @@ useEffect(() => {
                   >
                     {expense?.expenseTitle}
                   </Text>
-                  <Text>
-                    Amount = {expense?.expenseAmount}
-                    
-                  </Text>
-                  <Text>
-                  Date = {expense?.expenseDate}
-                   
-                  </Text>
-                  <Text>
-                  Category = {expense?.expenseTag}
-                  </Text>
+                  <Text>Amount = {expense?.expenseAmount}</Text>
+                  <Text>Date = {expense?.expenseDate}</Text>
+                  <Text>Category = {expense?.expenseTag}</Text>
                 </View>
-
-                
               </View>
             </View>
           ))
