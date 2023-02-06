@@ -4,7 +4,7 @@ import { FAB, Button } from "react-native-paper"
 import form from "../styles/Form.js"
 
 // database functions
-import { dbInitExpense, dbGetExpenses } from "../database/sqlite"
+import { dbInitExpense, dbGetExpenses, dbDeleteExpense } from "../database/sqlite"
 
 const Expenses = props => {
   const { navigation } = props
@@ -35,6 +35,16 @@ const Expenses = props => {
     console.log("Effect")
   }, [])
 
+  const deleteExpense = id => {
+    dbDeleteExpense(id)
+      .then(() => {
+        console.log("Expense deleted")
+      })
+      .catch(err => {
+        console.log("Error deleting expense", err)
+      })
+  }
+
   return (
     <View style={styles.container}>
       <ScrollView style={form.view}>
@@ -58,7 +68,7 @@ const Expenses = props => {
                   <Text>Category = {expense?.expenseTag}</Text>
                 </View>
                 <View>
-                  <TouchableOpacity>
+                  <TouchableOpacity onPress={() => deleteExpense(expense.id)}>
                     <Text style={form.deleteButton}>Delete</Text>
                   </TouchableOpacity>
                 </View>

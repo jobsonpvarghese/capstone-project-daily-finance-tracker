@@ -124,7 +124,6 @@ export const dropTable = () => {
 
 // =================================================================================================
 
-
 // Open a database for expense which holds the id, expense title , expense amount, expense date and the tag
 export const dbInitExpense = () => {
   const db = SQLite.openDatabase("expenses.db")
@@ -176,7 +175,13 @@ export const dbGetExpenses = () => {
         [],
         (_, result) => {
           const tasks = result.rows._array.map(item => {
-            return { id: item.id, expenseTitle: item.expenseTitle, expenseAmount: item.expenseAmount, expenseDate: item.expenseDate, expenseTag: item.expenseTag }
+            return {
+              id: item.id,
+              expenseTitle: item.expenseTitle,
+              expenseAmount: item.expenseAmount,
+              expenseDate: item.expenseDate,
+              expenseTag: item.expenseTag
+            }
           })
           resolve(tasks)
         },
@@ -188,5 +193,22 @@ export const dbGetExpenses = () => {
   })
 }
 
+// Delete a expense from the database
+export const dbDeleteExpense = id => {
+  const db = SQLite.openDatabase("expenses.db")
 
-
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `DELETE FROM expense WHERE id = ?;`,
+        [id],
+        (_, result) => {
+          resolve(result)
+        },
+        (_, err) => {
+          reject(err)
+        }
+      )
+    })
+  })
+}
