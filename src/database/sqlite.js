@@ -188,42 +188,5 @@ export const dbGetExpenses = () => {
   })
 }
 
-// Delete a expense from the database
-export const dbDeleteExpense = id => {
-  const db = SQLite.openDatabase("expenses.db")
 
-  return new Promise((resolve, reject) => {
-    db.transaction(tx => {
-      tx.executeSql(
-        `DELETE FROM expense WHERE id = ?;`,
-        [id],
-        (_, result) => {
-          resolve(result)
-        },
-        (_, err) => {
-          reject(err)
-        }
-      )
-    })
-  })
-}
-
-// Delete all expenses from the database
-export const dbDeleteAllExpenses = () => {
-  const db = SQLite.openDatabase("expenses.db")
-  return new Promise((resolve, reject) => {
-    db.transaction(tx => {
-      tx.executeSql(
-        `DELETE FROM expense;`,
-        [],
-        (_, result) => {
-          resolve(result)
-        },
-        (_, err) => {
-          reject(err)
-        }
-      )
-    })
-  })
-}
 
