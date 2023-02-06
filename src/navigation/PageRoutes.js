@@ -1,5 +1,8 @@
 import Detail from "../screens/Detail"
 import ExpenseFrom from "../components/ExpenseFrom"
+import CategoryAdd from "../components/CategoryAdd"
+import Category from "../screens/Category"
+
 
 export const route = [
   {
@@ -9,5 +12,13 @@ export const route = [
   {
     name: "ExpenseForm",
     component: ExpenseFrom
+  },
+  {
+    name: "CategoryAdd",
+    component: CategoryAdd
+  },
+  {
+    name: "Category",
+    component: Category
   }
 ]
