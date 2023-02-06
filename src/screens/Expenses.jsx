@@ -37,7 +37,6 @@ const Expenses = props => {
 
   return (
     <View style={styles.container}>
-      
       <ScrollView style={form.view}>
         {data == "" ? (
           <Text style={form.noData}>No data available</Text>
@@ -57,6 +56,11 @@ const Expenses = props => {
                   <Text>Amount = {expense?.expenseAmount}</Text>
                   <Text>Date = {expense?.expenseDate}</Text>
                   <Text>Category = {expense?.expenseTag}</Text>
+                </View>
+                <View>
+                  <TouchableOpacity>
+                    <Text style={form.deleteButton}>Delete</Text>
+                  </TouchableOpacity>
                 </View>
               </View>
             </View>
