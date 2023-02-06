@@ -3,7 +3,7 @@ import React from "react"
 
 const ExpenseFrom = () => {
   return (
-    <View>
+    <View style={styles.container}>
       <Text>ExpenseFrom</Text>
     </View>
   )
@@ -11,4 +11,8 @@ const ExpenseFrom = () => {
 
 export default ExpenseFrom
 
-const styles = StyleSheet.create({})
+const styles = StyleSheet.create({
+  container: {
+    margin: 20
+  }
+})
