@@ -8,7 +8,7 @@ import Form from "./Form.jsx"
 import TagList from "./TagList.jsx"
 import { dbInsert } from "../database/sqlite"
 
-const FormBody = ({ data, refreshVal }) => {
+const CategoryList = ({ data, refreshVal }) => {
   const [task, setTask] = useState("")
 
   // Add gamelist
@@ -29,4 +29,4 @@ const FormBody = ({ data, refreshVal }) => {
   )
 }
 
-export default FormBody
+export default CategoryList

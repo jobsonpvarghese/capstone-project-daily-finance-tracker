@@ -8,7 +8,7 @@ import Form from "./Form.jsx"
 import TagList from "./TagList.jsx"
 import { dbInsert } from "../database/sqlite"
 
-const FormBody = ({ data, refreshVal }) => {
+const FormBody = ({ refreshVal }) => {
   const [task, setTask] = useState("")
 
   // Add gamelist
@@ -19,7 +19,7 @@ const FormBody = ({ data, refreshVal }) => {
       e.preventDefault()
       dbInsert(uuid.v4(), task)
       setTask("")
-      refreshVal()
+      // refreshVal()
     }
   }
   return (
@@ -27,7 +27,6 @@ const FormBody = ({ data, refreshVal }) => {
       <View style={form.formBody}>
         <Form value={task} setData={setTask} onSubmit={onSubmit} />
       </View>
-      <TagList data={data} refreshVal={refreshVal} />
     </View>
   )
 }

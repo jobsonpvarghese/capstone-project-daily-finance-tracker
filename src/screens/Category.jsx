@@ -1,7 +1,7 @@
-import React,{ useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { StyleSheet, Text, View } from "react-native"
 import { Button, Dialog, Portal } from "react-native-paper"
-import FormBody from "../components/CategoryList"
+import CategoryList from "../components/CategoryList"
 import dashBoard from "../styles/Dashboard"
 
 // db functions
@@ -40,9 +40,9 @@ const Category = props => {
   return (
     <View style={styles.container}>
       <View style={dashBoard.body}>
-        <FormBody data={formData} refreshVal={refreshVal} />
+        <CategoryList data={formData} refreshVal={refreshVal} />
       </View>
-      <Button icon="plus" style={styles.fab} mode="contained" onPress={() => navigation.navigate("CategoryAdd")}>
+      <Button icon="plus" style={styles.fab} mode="contained" onPress={() => navigation.navigate("CategoryAdd", { refreshVal })}>
         Add Category
       </Button>
     </View>
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: "#fff",
     alignItems: "center",
-    justifyContent: "center",
+    justifyContent: "center"
   },
   bold: {
     fontWeight: "bold"
