@@ -1,11 +1,11 @@
 import React from "react"
 import { StyleSheet, Text, View } from "react-native"
 
-const Add = () => {
+const Category = () => {
   return (
     <View style={styles.container}>
       <Text>
-        Content for the <Text style={styles.bold}>Add</Text> component goes here.
+        Content for the <Text style={styles.bold}>Category</Text> component goes here.
       </Text>
     </View>
   )
@@ -23,4 +23,4 @@ const styles = StyleSheet.create({
   }
 })
 
-export default Add
+export default Category

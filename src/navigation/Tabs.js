@@ -7,7 +7,7 @@ import { Ionicons } from "react-native-vector-icons"
 import Home from "../screens/Home"
 import Expenses from "../screens/Expenses"
 import Settings from "../screens/Settings"
-import Add from "../screens/Add"
+import Category from "../screens/Category"
 
 // Tab Navigator
 const Tab = createBottomTabNavigator()
@@ -17,7 +17,7 @@ const Tabs = () => {
     <Tab.Navigator>
       <Tab.Screen name="Home" component={Home} options={{ ...styles.home, ...styles.tabBarStyle, headerShown: false }} />
       <Tab.Screen name="Expenses" component={Expenses} options={{ ...styles.Expenses, ...styles.tabBarStyle, headerShown: false }} />
-      <Tab.Screen name="Add" component={Add} options={{ ...styles.Add, ...styles.tabBarStyle, headerShown: false }} />
+      <Tab.Screen name="Category" component={Category} options={{ ...styles.Category, ...styles.tabBarStyle, headerShown: false }} />
       <Tab.Screen name="Settings" component={Settings} options={{ ...styles.setting, ...styles.tabBarStyle, headerShown: false }} />
     </Tab.Navigator>
   )
@@ -54,10 +54,10 @@ const styles = StyleSheet.create({
     }
   },
 
-  Add: {
+  Category: {
     tabBarIcon: props => {
       const { focused, color, size } = props
-      const iconName = focused ? "add" : "add-outline"
+      const iconName = focused ? "funnel" : "funnel-outline"
       return <Ionicons name={iconName} color={color} size={size} />
     }
   },
