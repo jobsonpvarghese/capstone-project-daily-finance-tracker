@@ -20,14 +20,14 @@ export const dbInit = () => {
   })
 }
 
-// Open a database for expenses.
-export const dbInitExpenses = () => {
+// Open a database for expense which holds the id, expense title , expense amount, expense date and the tag
+export const dbInitExpense = () => {
   const db = SQLite.openDatabase("expenses.db")
 
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        `CREATE TABLE IF NOT EXISTS expenses (id VARCHAR PRIMARY KEY NOT NULL, expense TEXT NOT NULL);`,
+        `CREATE TABLE IF NOT EXISTS expense (id VARCHAR PRIMARY KEY NOT NULL, expenseTitle TEXT NOT NULL, expenseAmount TEXT NOT NULL, expenseDate TEXT NOT NULL, expenseTag TEXT NOT NULL);`,
         [],
         () => {
           resolve()
@@ -40,15 +40,15 @@ export const dbInitExpenses = () => {
   })
 }
 
-// Insert the expense title , amount and the tag into the database
-export const dbInsertExpense = (id, expense) => {
+// Insert a expense into the database
+export const dbInsertExpense = (id, expenseTitle, expenseAmount, expenseDate, expenseTag) => {
   const db = SQLite.openDatabase("expenses.db")
 
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        `INSERT INTO expenses (id, expense) VALUES (?, ?);`,
-        [id, expense],
+        `INSERT INTO expense (id, expenseTitle, expenseAmount, expenseDate, expenseTag) VALUES (?, ?, ?, ?, ?);`,
+        [id, expenseTitle, expenseAmount, expenseDate, expenseTag],
         (_, result) => {
           resolve(result)
         },
@@ -60,18 +60,18 @@ export const dbInsertExpense = (id, expense) => {
   })
 }
 
-// Get all the expenses from the database
+// Get all expenses from the database
 export const dbGetExpenses = () => {
   const db = SQLite.openDatabase("expenses.db")
 
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        `SELECT * FROM expenses`,
+        `SELECT * FROM expense`,
         [],
         (_, result) => {
           const tasks = result.rows._array.map(item => {
-            return { id: item.id, expense: item.expense }
+            return { id: item.id, expenseTitle: item.expenseTitle, expenseAmount: item.expenseAmount, expenseDate: item.expenseDate, expenseTag: item.expenseTag }
           })
           resolve(tasks)
         },
@@ -82,6 +82,47 @@ export const dbGetExpenses = () => {
     })
   })
 }
+
+// Delete a expense from the database
+export const dbDeleteExpense = id => {
+  const db = SQLite.openDatabase("expenses.db")
+
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `DELETE FROM expense WHERE id = ?;`,
+        [id],
+        (_, result) => {
+          resolve(result)
+        },
+        (_, err) => {
+          reject(err)
+        }
+      )
+    })
+  })
+}
+
+// Delete all expenses from the database
+export const dbDeleteAllExpenses = () => {
+  const db = SQLite.openDatabase("expenses.db")
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `DELETE FROM expense;`,
+        [],
+        (_, result) => {
+          resolve(result)
+        },
+        (_, err) => {
+          reject(err)
+        }
+      )
+    })
+  })
+}
+
+
 
 // Insert a game into the database
 export const dbGetGames = () => {
