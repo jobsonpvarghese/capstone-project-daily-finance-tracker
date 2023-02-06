@@ -2,8 +2,34 @@ import React from "react"
 import {StyleSheet, Text, View } from "react-native"
 import { FAB, Button } from "react-native-paper"
 
+import { dbGetExpenses, dbInsertExpense } from "../database/sqlite"
+
 const Expenses = props => {
   const { navigation } = props
+
+  // Refresh data
+  const refreshVal = () => {
+    dbInsertExpense().then(data => {
+      setFormData(data)
+    })
+  }
+
+  // Init db
+  useEffect(() => {
+    dbInit()
+      .then(() => dbGetExpenses())
+      .then(data => {
+        setFormData(data)
+      })
+      .catch(err => {
+        console.log("Databae error", err)
+      })
+      .finally(() => {
+        console.log("Database initialized")
+      })
+    console.log("Effect")
+  }, [])
+
 
   return (
     <View style={styles.container}>

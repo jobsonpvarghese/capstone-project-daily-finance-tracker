@@ -2,7 +2,7 @@ import { StyleSheet } from "react-native"
 
 const form = StyleSheet.create({
   formBody: {
-    backgroundColor: "#5F9DF7",
+    backgroundColor: "##FF",
     borderRadius: 20,
     padding: 20,
     shadowColor: "#000",

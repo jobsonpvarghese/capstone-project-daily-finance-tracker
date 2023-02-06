@@ -1,29 +1,42 @@
 import { useState } from "react"
-import { View, Text, TextInput, Button, TouchableOpacity } from "react-native"
+import { View, Text, TextInput, TouchableOpacity } from "react-native"
+import {Button} from "react-native-paper"
 import form from "../styles/Form.js"
 
 const Form = ({ value, setData, onSubmit }) => {
   return (
-    <View style={form.formContainer}>
+    // a screen to add custom tags
+    <View style={form.container}>
+      <Text style={form.title}>Add a new tag</Text>
       <TextInput
-        style={form.formInput}
-        placeholder="Enter New Tag"
-        onChangeText={e => {
-          setData(e)
-        }}
+        style={form.input}
+        placeholder="Enter a tag"
         value={value}
+        onChangeText={text => setData(text)}
       />
-      <TouchableOpacity onPress={e => onSubmit(e)} style={form.submitButton} disabled={value === "" ? true : false}>
-        <Text
-          style={{
-            color: "white"
-          }}
-        >
-          Add Task
-        </Text>
-      </TouchableOpacity>
-    </View>
+      <Button
+        style={form.button}
+        mode="contained"
+        onPress={onSubmit}
+      >
+        Add
+      </Button>
+    </View>    
   )
 }
 
 export default Form
+
+
+const styles = StyleSheet.create({
+  container: {
+    margin: 20,
+    marginTop: 150
+  },
+  btnArea: {
+    marginTop: 20,
+    display: "flex",
+    flexDirection: "row"
+  }
+})
+
