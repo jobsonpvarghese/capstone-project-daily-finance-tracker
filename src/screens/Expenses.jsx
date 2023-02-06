@@ -37,9 +37,7 @@ const Expenses = props => {
 
   return (
     <View style={styles.container}>
-      <Text>
-        Content for the <Text style={styles.bold}>Expenses</Text> component goes here.
-      </Text>
+      
       <ScrollView style={form.view}>
         {data == "" ? (
           <Text style={form.noData}>No data available</Text>
