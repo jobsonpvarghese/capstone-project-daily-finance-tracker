@@ -1,17 +1,81 @@
-import React, { useEffect } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import React, { useEffect, useState } from "react"
+import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { FAB, Button } from "react-native-paper"
+import form from "../styles/Form.js"
 
-// databse functions
+
+// database functions
+import { dbInitExpense, dbGetExpenses } from "../database/sqlite"
 
 const Expenses = props => {
   const { navigation } = props
+  const [data, setData] = useState([])
+
+// Refresh data
+const refreshVal = () => {
+  dbGetexpenses().then(data => {
+    setData(data)
+  })
+}
+
+// Init db
+useEffect(() => {
+  dbInitExpense()
+    .then(() => dbGetExpenses())
+    .then(data => {
+      setData(data)
+      console.log("Data", data)
+    })
+    .catch(err => {
+      console.log("Databae error", err)
+    })
+    .finally(() => {
+      console.log("Database initialized")
+    })
+
+  console.log("Effect")
+}, [])
 
   return (
     <View style={styles.container}>
       <Text>
         Content for the <Text style={styles.bold}>Expenses</Text> component goes here.
       </Text>
+      <ScrollView style={form.view}>
+        {data == "" ? (
+          <Text style={form.noData}>No data available</Text>
+        ) : (
+          data?.map((expense, index) => (
+            <View style={form.listitem} key={index}>
+              <View style={form.list}>
+                <View style={form.listLeft}>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      fontWeight: "bold"
+                    }}
+                  >
+                    {expense?.expenseTitle}
+                  </Text>
+                  <Text>
+                    Amount = {expense?.expenseAmount}
+                    
+                  </Text>
+                  <Text>
+                  Date = {expense?.expenseDate}
+                   
+                  </Text>
+                  <Text>
+                  Category = {expense?.expenseTag}
+                  </Text>
+                </View>
+
+                
+              </View>
+            </View>
+          ))
+        )}
+      </ScrollView>
       <Button icon="plus" style={styles.fab} textColor="#FFF" onPress={() => navigation.navigate("ExpenseForm")}>
         Add Expense
       </Button>
