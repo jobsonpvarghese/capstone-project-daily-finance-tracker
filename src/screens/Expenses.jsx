@@ -1,8 +1,8 @@
-import React from "react"
-import {StyleSheet, Text, View } from "react-native"
+import React, { useEffect } from "react"
+import { StyleSheet, Text, View } from "react-native"
 import { FAB, Button } from "react-native-paper"
 
-import { dbGetExpenses, dbInsertExpense } from "../database/sqlite"
+import { dbInit, dbGetExpenses, dbInsertExpense } from "../database/sqlite"
 
 const Expenses = props => {
   const { navigation } = props
@@ -30,13 +30,12 @@ const Expenses = props => {
     console.log("Effect")
   }, [])
 
-
   return (
     <View style={styles.container}>
       <Text>
         Content for the <Text style={styles.bold}>Expenses</Text> component goes here.
       </Text>
-      <Button icon="plus" style={styles.fab} textColor="#FFF" onPress={() => navigation.navigate("ExpenseForm")} >
+      <Button icon="plus" style={styles.fab} textColor="#FFF" onPress={() => navigation.navigate("ExpenseForm")}>
         Add Expense
       </Button>
     </View>

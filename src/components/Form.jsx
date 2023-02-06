@@ -1,6 +1,6 @@
 import { useState } from "react"
-import { View, Text, TextInput, TouchableOpacity } from "react-native"
-import {Button} from "react-native-paper"
+import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native"
+import { Button } from "react-native-paper"
 import form from "../styles/Form.js"
 
 const Form = ({ value, setData, onSubmit }) => {
@@ -8,25 +8,15 @@ const Form = ({ value, setData, onSubmit }) => {
     // a screen to add custom tags
     <View style={form.container}>
       <Text style={form.title}>Add a new tag</Text>
-      <TextInput
-        style={form.input}
-        placeholder="Enter a tag"
-        value={value}
-        onChangeText={text => setData(text)}
-      />
-      <Button
-        style={form.button}
-        mode="contained"
-        onPress={onSubmit}
-      >
+      <TextInput style={form.input} placeholder="Enter a tag" value={value} onChangeText={text => setData(text)} />
+      <Button style={form.button} mode="contained" onPress={onSubmit}>
         Add
       </Button>
-    </View>    
+    </View>
   )
 }
 
 export default Form
-
 
 const styles = StyleSheet.create({
   container: {
@@ -39,4 +29,3 @@ const styles = StyleSheet.create({
     flexDirection: "row"
   }
 })
-

@@ -60,7 +60,6 @@ export const dbInsertExpense = (id, expense) => {
   })
 }
 
-
 // Get all the expenses from the database
 export const dbGetExpenses = () => {
   const db = SQLite.openDatabase("expenses.db")
@@ -83,7 +82,6 @@ export const dbGetExpenses = () => {
     })
   })
 }
-
 
 // Insert a game into the database
 export const dbGetGames = () => {
