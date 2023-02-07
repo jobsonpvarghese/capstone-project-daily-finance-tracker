@@ -25,19 +25,6 @@ const TagList = props => {
     )
   }
 
-  // Delete all tag
-  const deleteAll = () => {
-    AlertDialog("Delete All", "Are you sure you want to delete all category?", () => {
-      dbDeleteAll()
-        .then(() => {
-          refreshVal()
-        })
-        .catch(err => {
-          console.log("Error", err)
-        })
-    })
-  }
-
   // Delete single tag
   const deleteData = id => {
     AlertDialog("Delete", "Are you sure you want to delete this category?", () => {
@@ -50,7 +37,6 @@ const TagList = props => {
         })
     })
   }
-
 
   return (
     <View>
@@ -82,8 +68,8 @@ const TagList = props => {
           ))
         )}
       </ScrollView>
-      <TouchableOpacity style={form.deleteAllDiv} onPress={deleteAll} disabled={data == "" ? true : false}>
-        <Text style={form.deleteAll}>Delete All</Text>
+      <TouchableOpacity style={form.deleteAllDiv} onPress={() => refreshVal()}>
+        <Text style={form.deleteAll}>Refresh</Text>
       </TouchableOpacity>
     </View>
   )

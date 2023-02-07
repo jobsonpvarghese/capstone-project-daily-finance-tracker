@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Button, Dialog, Portal } from "react-native-paper"
 import CategoryList from "../components/CategoryList"
 import dashBoard from "../styles/Dashboard"
@@ -42,7 +42,7 @@ const Category = props => {
       <View style={dashBoard.body}>
         <CategoryList data={formData} refreshVal={refreshVal} />
       </View>
-      <Button icon="plus" style={styles.fab} mode="contained" onPress={() => navigation.navigate("CategoryAdd", { refreshVal })}>
+      <Button icon="plus" style={styles.fab} mode="contained" onPress={() => navigation.navigate("CategoryAdd")}>
         Add Category
       </Button>
     </View>
