@@ -38,8 +38,8 @@ const form = StyleSheet.create({
     borderRadius: 5
   },
   view: {
-    height: "80%",
-    paddingTop: 30
+    height: "100%",
+    marginVertical: 30
   },
   listitem: {
     backgroundColor: "#FFF7E9",

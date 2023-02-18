@@ -3,6 +3,7 @@ import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Button, Dialog, Portal } from "react-native-paper"
 import CategoryList from "../components/CategoryList"
 import dashBoard from "../styles/Dashboard"
+import { useFocusEffect } from '@react-navigation/native';
 
 // db functions
 import { dbGetGames, dbInit, dropTable } from "../database/sqlite"
@@ -21,8 +22,9 @@ const Category = props => {
   }
 
   // Init db
-  useEffect(() => {
-    dbInit()
+  useFocusEffect(
+    React.useCallback(() => {
+      dbInit()
       .then(() => dbGetGames())
       .then(data => {
         setFormData(data)
@@ -33,9 +35,14 @@ const Category = props => {
       .finally(() => {
         console.log("Database initialized")
       })
-
-    console.log("Effect")
-  }, [])
+      // Do something when the screen is focused
+      return () => {
+        console.log('Screen was unfocused');
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
 
   return (
     <View style={styles.container}>

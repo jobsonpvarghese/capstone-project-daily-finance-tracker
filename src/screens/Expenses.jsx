@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { FAB, Button } from "react-native-paper"
 import form from "../styles/Form.js"
+import { useFocusEffect } from '@react-navigation/native';
 
 // database functions
 import { dbInitExpense, dbGetExpenses, dbDeleteExpense } from "../database/sqlite"
@@ -26,8 +27,9 @@ const Expenses = props => {
   }
 
   // Init db
-  useEffect(() => {
-    dbInitExpense()
+  useFocusEffect(
+    React.useCallback(() => {
+      dbInitExpense()
       .then(() => dbGetExpenses())
       .then(data => {
         setData(data)
@@ -39,9 +41,14 @@ const Expenses = props => {
       .finally(() => {
         console.log("Database initialized")
       })
-
-    console.log("Effect")
-  }, [])
+      // Do something when the screen is focused
+      return () => {
+        console.log('Screen was unfocused');
+        // Do something when the screen is unfocused
+        // Useful for cleanup functions
+      };
+    }, [])
+  );
 
   const deleteExpense = id => {
     dbDeleteExpense(id)

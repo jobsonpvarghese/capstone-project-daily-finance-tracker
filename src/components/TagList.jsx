@@ -68,9 +68,6 @@ const TagList = props => {
           ))
         )}
       </ScrollView>
-      <TouchableOpacity style={form.deleteAllDiv} onPress={() => refreshVal()}>
-        <Text style={form.deleteAll}>Refresh</Text>
-      </TouchableOpacity>
     </View>
   )
 }
