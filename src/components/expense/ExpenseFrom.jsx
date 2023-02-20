@@ -3,10 +3,11 @@ import React, { useState } from "react"
 import { TextInput, Button } from "react-native-paper"
 import uuid from "react-native-uuid"
 
-import { dbInsertExpense } from "../../database/ExpenseTable"
+import { dbEditExpense, dbInsertExpense } from "../../database/ExpenseTable"
 
 const ExpenseFrom = props => {
-  const { navigation } = props
+  const { navigation, id } = props
+  const action = props?.route?.params?.action
 
   // hooks for expense title, amount, tag and date
   const [expenseTitle, setExpenseTitle] = useState("")
@@ -16,8 +17,13 @@ const ExpenseFrom = props => {
   const [expenseSource, setSource] = useState("")
 
   // function to add expense
-  const addExpense = () => {
-    dbInsertExpense(uuid.v4(), expenseTitle, amount, date, tag, expenseSource)
+  const onClickAction = id => {
+    if (action.toUpperCase() === "ADD") {
+      dbInsertExpense(uuid.v4(), expenseTitle, amount, date, tag, expenseSource)
+      navigation.navigate("Expenses")
+    } else {
+      dbEditExpense(id, expenseTitle, amount, date, tag, expenseSource)
+    }
   }
 
   return (
@@ -30,7 +36,7 @@ const ExpenseFrom = props => {
           textAlign: "center"
         }}
       >
-        Add Expense
+        {action.toUpperCase() === "ADD" ? "Add Expense" : "Edit Expense"}
       </Text>
       <TextInput mode="outlined" label="Expense Title" placeholder="Enter you expense label" onChangeText={title => setExpenseTitle(title)} />
       <TextInput mode="outlined" label="Amount" placeholder="$" onChangeText={amount => setAmount(amount)} />
@@ -49,11 +55,10 @@ const ExpenseFrom = props => {
           icon="file"
           mode="contained"
           onPress={() => {
-            addExpense()
-            navigation.navigate("Expenses")
+            onClickAction()
           }}
         >
-          Add
+          {action.toUpperCase() === "ADD" ? "Add" : "Save"}
         </Button>
       </View>
     </View>

@@ -1,9 +1,10 @@
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native"
 import React from "react"
-
+import { MaterialCommunityIcons } from "react-native-vector-icons"
 
 const ExpenseList = props => {
-  const { data, deleteExpense } = props
+  const { data, deleteExpense, navigation } = props
+
   return (
     <View>
       {data == "" ? (
@@ -11,24 +12,60 @@ const ExpenseList = props => {
       ) : (
         data?.map((expense, index) => (
           <View style={styles.listitem} key={index}>
-            <View style={styles.list}>
+            <View style={styles.listHeader}>
               <View style={styles.listLeft}>
-                <Text
-                  style={{
-                    fontSize: 14,
-                    fontWeight: "bold"
-                  }}
-                >
-                  {expense?.expenseTitle}
-                </Text>
-                <Text>Amount = {expense?.expenseAmount}</Text>
-                <Text>Date = {expense?.expenseDate}</Text>
-                <Text>Category = {expense?.expenseTag}</Text>
+                <View style={styles.expenseIconBg}>
+                  <Image style={styles.expenseIcon} source={require("../../assets/icons/expenses.png")} />
+                </View>
+
+                <View>
+                  <Text
+                    style={{
+                      fontSize: 14,
+                      fontWeight: "bold"
+                    }}
+                  >
+                    {expense?.expenseTitle}
+                  </Text>
+                  <Text style={{ fontSize: 12, color: "gray" }}>$ {expense?.expenseAmount}</Text>
+                </View>
               </View>
-              <View>
-                <TouchableOpacity onPress={() => deleteExpense(expense.id)}>
-                  <Text style={styles.deleteButton}>Delete</Text>
+              <View style={styles.buttonArea}>
+                <TouchableOpacity
+                  onPress={() =>
+                    navigation.navigate("ExpenseForm", {
+                      action: "Edit"
+                    })
+                  }
+                >
+                  <MaterialCommunityIcons name={"pencil-outline"} color={"gray"} size={26} />
                 </TouchableOpacity>
+
+                <TouchableOpacity onPress={() => deleteExpense(expense.id)}>
+                  <MaterialCommunityIcons name={"delete-outline"} color={"#EB455F"} size={26} />
+                </TouchableOpacity>
+              </View>
+            </View>
+            <View
+              style={{
+                flexDirection: "row",
+                justifyContent: "space-between",
+                alignItems: "center",
+                paddingTop: 10
+              }}
+            >
+              <Text style={{ fontSize: 12, color: "gray" }}>{expense?.expenseDate}</Text>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "green",
+                  padding: 5,
+                  borderRadius: 5
+                }}
+              >
+                <Text style={{ fontSize: 12, color: "white" }}>{expense?.expenseTag}</Text>
               </View>
             </View>
           </View>
@@ -43,24 +80,40 @@ export default ExpenseList
 const styles = StyleSheet.create({
   listitem: {
     backgroundColor: "#FFF7E9",
-    borderRadius: 10,
-    padding: 20,
-    marginTop: 10
+
+    padding: 10,
+    borderRadius: 5,
+    marginBottom: 10
   },
-  list: {
-    display: "flex",
+  listHeader: {
     flexDirection: "row",
     justifyContent: "space-between",
-    alignItems: "center"
+    alignItems: "center",
+    borderBottomColor: "#FCE22A",
+    borderBottomWidth: 1,
+    paddingBottom: 10
   },
   listLeft: {
+    flexDirection: "row",
+    alignItems: "center",
     width: "78%"
   },
-
-  deleteButton: {
-    backgroundColor: "#FF731D",
-    color: "#fff",
-    borderRadius: 5,
-    padding: 10
+  expenseIcon: {
+    width: 30,
+    height: 30
+  },
+  expenseIconBg: {
+    backgroundColor: "#FCE22A",
+    borderRadius: 10,
+    padding: 5,
+    marginRight: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  buttonArea: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
   }
 })

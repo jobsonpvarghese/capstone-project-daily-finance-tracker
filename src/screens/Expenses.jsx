@@ -17,7 +17,6 @@ const Expenses = props => {
     dbGetExpenses()
       .then(data => {
         setData(data)
-        console.log("Data", data)
       })
       .catch(err => {
         console.log("Database error", err)
@@ -34,7 +33,6 @@ const Expenses = props => {
         .then(() => dbGetExpenses())
         .then(data => {
           setData(data)
-          console.log("Data", data)
         })
         .catch(err => {
           console.log("Databae error", err)
@@ -64,20 +62,20 @@ const Expenses = props => {
 
   return (
     <View style={styles.container}>
-      {/* Refresh button */}
-      <TouchableOpacity
-        style={{
-          fontSize: 14,
-          marginTop: 20
-        }}
-      >
-        <Text onPress={() => refreshVal()}>Refresh</Text>
-      </TouchableOpacity>
       <ScrollView style={form.view}>
-        <ExpenseList data={data} deleteExpense={deleteExpense} />
+        <ExpenseList data={data} deleteExpense={deleteExpense} navigation={navigation} />
       </ScrollView>
 
-      <Button icon="plus" style={styles.fab} textColor="#FFF" onPress={() => navigation.navigate("ExpenseForm")}>
+      <Button
+        icon="plus"
+        style={styles.fab}
+        textColor="#FFF"
+        onPress={() =>
+          navigation.navigate("ExpenseForm", {
+            action: "Add"
+          })
+        }
+      >
         Add Expense
       </Button>
     </View>

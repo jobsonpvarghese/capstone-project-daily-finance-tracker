@@ -1,7 +1,6 @@
 import React from "react"
 import { Button, StyleSheet, Text, View } from "react-native"
 
-
 const Home = props => {
   const { navigation } = props
 
