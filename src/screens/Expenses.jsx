@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
-import { FAB, Button } from "react-native-paper"
+import { Button } from "react-native-paper"
 import form from "../styles/Form.js"
 import { useFocusEffect } from '@react-navigation/native';
 
 // database functions
-import { dbInitExpense, dbGetExpenses, dbDeleteExpense, dropTableExpense } from "../database/sqlite"
+import { dbInitExpense, dbGetExpenses, dbDeleteExpense } from "../database/ExpenseTable"
 
 const Expenses = props => {
   const { navigation } = props
@@ -19,7 +19,7 @@ const Expenses = props => {
         console.log("Data", data)
       })
       .catch(err => {
-        console.log("Databae error", err)
+        console.log("Database error", err)
       })
       .finally(() => {
         console.log("Database initialized")

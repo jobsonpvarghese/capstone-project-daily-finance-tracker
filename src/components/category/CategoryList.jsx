@@ -4,7 +4,7 @@ import uuid from "react-native-uuid"
 
 // custom imports
 import TagList from "./TagList.jsx"
-import { dbInsert } from "../../database/sqlite"
+import { dbInsert } from "../../database/CategoryTable"
 
 const CategoryList = ({ data, refreshVal }) => {
   const [task, setTask] = useState("")

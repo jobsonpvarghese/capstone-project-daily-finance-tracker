@@ -3,7 +3,7 @@ import { View, Text, ScrollView, TouchableOpacity, Alert, StyleSheet } from "rea
 import form from "../../styles/Form.js"
 
 // db functions
-import { dbDelete, dbDeleteAll } from "../../database/sqlite.js"
+import { dbDelete, dbDeleteAll } from "../../database/CategoryTable"
 
 const TagList = props => {
   const { data, refreshVal } = props

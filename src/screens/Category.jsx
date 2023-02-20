@@ -6,7 +6,7 @@ import dashBoard from "../styles/Dashboard"
 import { useFocusEffect } from "@react-navigation/native"
 
 // db functions
-import { dbGetGames, dbInit, dropTable } from "../database/sqlite"
+import { dbGetGames, dbInit, dropTable } from "../database/CategoryTable"
 
 const Category = props => {
   const { navigation } = props

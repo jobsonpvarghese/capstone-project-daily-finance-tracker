@@ -3,7 +3,7 @@ import React, { useState } from "react"
 import { TextInput, Button } from "react-native-paper"
 import uuid from "react-native-uuid"
 
-import { dbInsertExpense } from "../../database/sqlite"
+import { dbInsertExpense } from "../../database/ExpenseTable"
 
 const ExpenseFrom = props => {
   const { navigation } = props
