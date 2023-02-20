@@ -11,8 +11,6 @@ const Home = props => {
         Content for the <Text style={styles.bold}>home</Text> component goes here.
       </Text>
       <Button title="Show Details" onPress={() => navigation.navigate("Details")} />
-   
-
     </View>
   )
 }
