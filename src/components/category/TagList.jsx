@@ -1,9 +1,9 @@
 import React from "react"
 import { View, Text, ScrollView, TouchableOpacity, Alert, StyleSheet } from "react-native"
-import form from "../styles/Form.js"
+import form from "../../styles/Form.js"
 
 // db functions
-import { dbDelete, dbDeleteAll } from "../database/sqlite.js"
+import { dbDelete, dbDeleteAll } from "../../database/sqlite.js"
 
 const TagList = props => {
   const { data, refreshVal } = props

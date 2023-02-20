@@ -1,8 +1,7 @@
 import Detail from "../screens/Detail"
-import ExpenseFrom from "../components/ExpenseFrom"
-import CategoryAdd from "../components/CategoryAdd"
+import ExpenseFrom from "../components/expense/ExpenseFrom"
+import CategoryAdd from "../components/category/CategoryAdd"
 import Category from "../screens/Category"
-
 
 export const route = [
   {

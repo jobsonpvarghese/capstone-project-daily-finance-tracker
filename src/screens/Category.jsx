@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Button, Dialog, Portal } from "react-native-paper"
-import CategoryList from "../components/CategoryList"
+import CategoryList from "../components/category/CategoryList"
 import dashBoard from "../styles/Dashboard"
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from "@react-navigation/native"
 
 // db functions
 import { dbGetGames, dbInit, dropTable } from "../database/sqlite"
@@ -25,24 +25,24 @@ const Category = props => {
   useFocusEffect(
     React.useCallback(() => {
       dbInit()
-      .then(() => dbGetGames())
-      .then(data => {
-        setFormData(data)
-      })
-      .catch(err => {
-        console.log("Databae error", err)
-      })
-      .finally(() => {
-        console.log("Database initialized")
-      })
+        .then(() => dbGetGames())
+        .then(data => {
+          setFormData(data)
+        })
+        .catch(err => {
+          console.log("Databae error", err)
+        })
+        .finally(() => {
+          console.log("Database initialized")
+        })
       // Do something when the screen is focused
       return () => {
-        console.log('Screen was unfocused');
+        console.log("Screen was unfocused")
         // Do something when the screen is unfocused
         // Useful for cleanup functions
-      };
+      }
     }, [])
-  );
+  )
 
   return (
     <View style={styles.container}>

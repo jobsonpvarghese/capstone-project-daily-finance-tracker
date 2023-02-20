@@ -3,10 +3,8 @@ import React, { useEffect, useState } from "react"
 import uuid from "react-native-uuid"
 
 // custom imports
-import form from "../styles/Form.js"
-import Form from "./Form.jsx"
 import TagList from "./TagList.jsx"
-import { dbInsert } from "../database/sqlite"
+import { dbInsert } from "../../database/sqlite"
 
 const CategoryList = ({ data, refreshVal }) => {
   const [task, setTask] = useState("")
