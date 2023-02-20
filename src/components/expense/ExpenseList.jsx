@@ -1,6 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native"
 import React from "react"
 
+
 const ExpenseList = props => {
   const { data, deleteExpense } = props
   return (

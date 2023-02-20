@@ -1,6 +1,8 @@
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text, View, TextInput, Button } from "react-native"
 import uuid from "react-native-uuid"
 import { useNavigation } from "@react-navigation/native"
+import React, { useEffect, useState } from "react"
+
 
 import dashBoard from "../../styles/Dashboard"
 
