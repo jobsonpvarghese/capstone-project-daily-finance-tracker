@@ -34,7 +34,8 @@ const ExpenseList = props => {
                 <TouchableOpacity
                   onPress={() =>
                     navigation.navigate("ExpenseForm", {
-                      action: "Edit"
+                      action: "Edit",
+                      data: expense
                     })
                   }
                 >

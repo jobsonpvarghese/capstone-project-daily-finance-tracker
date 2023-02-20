@@ -73,7 +73,6 @@ export const dbGetExpenses = () => {
 // edit a expense from the database
 export const dbEditExpense = (id, expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource) => {
   const db = SQLite.openDatabase("expenses.db")
-
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
