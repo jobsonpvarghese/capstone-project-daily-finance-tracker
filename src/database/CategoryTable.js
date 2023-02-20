@@ -6,7 +6,7 @@ export const dbInit = () => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
         tx.executeSql(
-          `CREATE TABLE IF NOT EXISTS games (id VARCHAR PRIMARY KEY NOT NULL, game TEXT NOT NULL, colour TEXT);`,
+          `CREATE TABLE IF NOT EXISTS games (id VARCHAR PRIMARY KEY NOT NULL, game TEXT NOT NULL, color TEXT NOT NULL);`,
           [],
           () => {
             resolve()
@@ -30,7 +30,7 @@ export const dbInit = () => {
           [],
           (_, result) => {
             const tasks = result.rows._array.map(item => {
-              return { id: item.id, game: item.game, colour: item.colour }
+              return { id: item.id, game: item.game, color: item.color }
             })
             resolve(tasks)
           },
@@ -43,14 +43,14 @@ export const dbInit = () => {
   }
   
   // Insert a game into the database
-  export const dbInsert = (id, game) => {
+  export const dbInsert = (id, game, color) => {
     const db = SQLite.openDatabase("category.db")
   
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
         tx.executeSql(
-          `INSERT INTO games (id, game, colour) VALUES (?, ?, ?);`,
-          [id, game, colour],
+          `INSERT INTO games (id, game, color) VALUES (?, ?, ?);`,
+          [id, game, color],
           (_, result) => {
             resolve(result)
           },

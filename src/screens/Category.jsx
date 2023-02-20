@@ -51,6 +51,12 @@ const Category = props => {
       <Button icon="plus" style={styles.fab} mode="contained" onPress={() => navigation.navigate("CategoryAdd")}>
         Add Category
       </Button>
+      
+      {/* add a touchable opacity button to drop the table */}
+      <TouchableOpacity onPress={() => dropTable()}>
+        <Text style={styles.bold}>Drop Table</Text>
+      </TouchableOpacity>
+      
     </View>
   )
 }

@@ -57,6 +57,12 @@ const TagList = props => {
                     {game?.game}
                   </Text>
                 </View>
+                
+                {/* Show the color of the tag */}
+                <View style={form.listRight}>
+                  <View style={{ backgroundColor: game?.color, width: 20, height: 20, marginRight: 20, borderRadius: 10 }}></View>
+                </View>
+
 
                 <View>
                   <TouchableOpacity onPress={() => deleteData(game.id)}>
