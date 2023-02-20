@@ -1,14 +1,14 @@
 import { StyleSheet, Text, View } from "react-native"
-import React, {useState} from "react"
+import React, { useState } from "react"
 import { TextInput, Button } from "react-native-paper"
 import uuid from "react-native-uuid"
 
-import { dbInsertExpense } from "../database/sqlite"
+import { dbInsertExpense } from "../../database/sqlite"
 
 const ExpenseFrom = props => {
   const { navigation } = props
 
-  // hooks for expense title, amount, tag and date 
+  // hooks for expense title, amount, tag and date
   const [expenseTitle, setExpenseTitle] = useState("")
   const [amount, setAmount] = useState("")
   const [tag, setTag] = useState("")
@@ -17,9 +17,8 @@ const ExpenseFrom = props => {
 
   // function to add expense
   const addExpense = () => {
-    dbInsertExpense(uuid.v4(),expenseTitle, amount, date, tag, expenseSource)
+    dbInsertExpense(uuid.v4(), expenseTitle, amount, date, tag, expenseSource)
   }
-
 
   return (
     <View style={styles.container}>
@@ -34,10 +33,10 @@ const ExpenseFrom = props => {
         Add Expense
       </Text>
       <TextInput mode="outlined" label="Expense Title" placeholder="Enter you expense label" onChangeText={title => setExpenseTitle(title)} />
-      <TextInput mode="outlined" label="Amount" placeholder="$" onChangeText={amount => setAmount(amount)}/>
+      <TextInput mode="outlined" label="Amount" placeholder="$" onChangeText={amount => setAmount(amount)} />
       <TextInput mode="outlined" label="Enter the tag" placeholder=" " onChangeText={tag => setTag(tag)} />
-      <TextInput mode="outlined" label="Date" placeholder="ddmmyyyy" onChangeText={date => setDate(date)}/>
-      <TextInput mode="outlined" label="Source" placeholder="Income/Expense " onChangeText={expenseSource => setSource(expenseSource)}/>
+      <TextInput mode="outlined" label="Date" placeholder="ddmmyyyy" onChangeText={date => setDate(date)} />
+      <TextInput mode="outlined" label="Source" placeholder="Income/Expense " onChangeText={expenseSource => setSource(expenseSource)} />
       <View style={styles.btnArea}>
         <Button style={{ borderColor: "#F94A29" }} icon="close" textColor="#F94A29" mode="outlined" onPress={() => navigation.navigate("Expenses")}>
           Cancel
