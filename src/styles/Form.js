@@ -38,7 +38,7 @@ const form = StyleSheet.create({
     borderRadius: 5
   },
   view: {
-    height: "100%",
+    height: "87%",
     marginVertical: 30
   },
   listitem: {

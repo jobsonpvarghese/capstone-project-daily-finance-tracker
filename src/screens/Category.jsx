@@ -20,7 +20,6 @@ const Category = props => {
       setFormData(data)
     })
   }
-
   // Init db
   useFocusEffect(
     React.useCallback(() => {

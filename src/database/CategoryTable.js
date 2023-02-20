@@ -6,7 +6,7 @@ export const dbInit = () => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
         tx.executeSql(
-          `CREATE TABLE IF NOT EXISTS games (id VARCHAR PRIMARY KEY NOT NULL, game TEXT NOT NULL);`,
+          `CREATE TABLE IF NOT EXISTS games (id VARCHAR PRIMARY KEY NOT NULL, game TEXT NOT NULL, colour TEXT);`,
           [],
           () => {
             resolve()
@@ -30,7 +30,7 @@ export const dbInit = () => {
           [],
           (_, result) => {
             const tasks = result.rows._array.map(item => {
-              return { id: item.id, game: item.game }
+              return { id: item.id, game: item.game, colour: item.colour }
             })
             resolve(tasks)
           },
@@ -49,8 +49,8 @@ export const dbInit = () => {
     return new Promise((resolve, reject) => {
       db.transaction(tx => {
         tx.executeSql(
-          `INSERT INTO games (id, game) VALUES (?, ?);`,
-          [id, game],
+          `INSERT INTO games (id, game, colour) VALUES (?, ?, ?);`,
+          [id, game, colour],
           (_, result) => {
             resolve(result)
           },
