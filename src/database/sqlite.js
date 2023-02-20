@@ -131,7 +131,8 @@ export const dbInitExpense = () => {
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        `CREATE TABLE IF NOT EXISTS expense (id VARCHAR PRIMARY KEY NOT NULL, expenseTitle TEXT NOT NULL, expenseAmount TEXT NOT NULL, expenseDate TEXT NOT NULL, expenseTag TEXT NOT NULL);`,
+        `CREATE TABLE IF NOT EXISTS expense (id VARCHAR PRIMARY KEY NOT NULL, expenseTitle TEXT NOT NULL, 
+          expenseAmount TEXT NOT NULL, expenseDate TEXT NOT NULL, expenseTag TEXT NOT NULL, expenseSource TEXT NOT NULL);`,
         [],
         () => {
           resolve()
@@ -145,14 +146,14 @@ export const dbInitExpense = () => {
 }
 
 // Insert a expense into the database
-export const dbInsertExpense = (id, expenseTitle, expenseAmount, expenseDate, expenseTag) => {
+export const dbInsertExpense = (id, expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource) => {
   const db = SQLite.openDatabase("expenses.db")
 
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        `INSERT INTO expense (id, expenseTitle, expenseAmount, expenseDate, expenseTag) VALUES (?, ?, ?, ?, ?);`,
-        [id, expenseTitle, expenseAmount, expenseDate, expenseTag],
+        `INSERT INTO expense (id, expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource) VALUES (?, ?, ?, ?, ?, ?);`,
+        [id, expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource],
         (_, result) => {
           resolve(result)
         },
@@ -180,7 +181,8 @@ export const dbGetExpenses = () => {
               expenseTitle: item.expenseTitle,
               expenseAmount: item.expenseAmount,
               expenseDate: item.expenseDate,
-              expenseTag: item.expenseTag
+              expenseTag: item.expenseTag,
+              expenseSource: item.expenseSource
             }
           })
           resolve(tasks)
