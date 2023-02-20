@@ -5,12 +5,8 @@ import form from "../styles/Form.js"
 import { useFocusEffect } from "@react-navigation/native"
 
 // database functions
-<<<<<<< HEAD
 import { dbInitExpense, dbGetExpenses, dbDeleteExpense } from "../database/ExpenseTable"
-=======
-import { dbInitExpense, dbGetExpenses, dbDeleteExpense, dropTableExpense } from "../database/sqlite"
 import ExpenseList from "../components/expense/ExpenseList.jsx"
->>>>>>> 1ec0db3 (.)
 
 const Expenses = props => {
   const { navigation } = props
