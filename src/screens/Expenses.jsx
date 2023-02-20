@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react"
 import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native"
 import { Button } from "react-native-paper"
 import form from "../styles/Form.js"
-import { useFocusEffect } from '@react-navigation/native';
+import { useFocusEffect } from "@react-navigation/native"
 
 // database functions
+<<<<<<< HEAD
 import { dbInitExpense, dbGetExpenses, dbDeleteExpense } from "../database/ExpenseTable"
+=======
+import { dbInitExpense, dbGetExpenses, dbDeleteExpense, dropTableExpense } from "../database/sqlite"
+import ExpenseList from "../components/expense/ExpenseList.jsx"
+>>>>>>> 1ec0db3 (.)
 
 const Expenses = props => {
   const { navigation } = props
@@ -30,25 +35,25 @@ const Expenses = props => {
   useFocusEffect(
     React.useCallback(() => {
       dbInitExpense()
-      .then(() => dbGetExpenses())
-      .then(data => {
-        setData(data)
-        console.log("Data", data)
-      })
-      .catch(err => {
-        console.log("Databae error", err)
-      })
-      .finally(() => {
-        console.log("Database initialized")
-      })
+        .then(() => dbGetExpenses())
+        .then(data => {
+          setData(data)
+          console.log("Data", data)
+        })
+        .catch(err => {
+          console.log("Databae error", err)
+        })
+        .finally(() => {
+          console.log("Database initialized")
+        })
       // Do something when the screen is focused
       return () => {
-        console.log('Screen was unfocused');
+        console.log("Screen was unfocused")
         // Do something when the screen is unfocused
         // Useful for cleanup functions
-      };
+      }
     }, [])
-  );
+  )
 
   const deleteExpense = id => {
     dbDeleteExpense(id)
@@ -73,34 +78,7 @@ const Expenses = props => {
         <Text onPress={() => refreshVal()}>Refresh</Text>
       </TouchableOpacity>
       <ScrollView style={form.view}>
-        {data == "" ? (
-          <Text style={form.noData}>No data available</Text>
-        ) : (
-          data?.map((expense, index) => (
-            <View style={form.listitem} key={index}>
-              <View style={form.list}>
-                <View style={form.listLeft}>
-                  <Text
-                    style={{
-                      fontSize: 14,
-                      fontWeight: "bold"
-                    }}
-                  >
-                    {expense?.expenseTitle}
-                  </Text>
-                  <Text>Amount = {expense?.expenseAmount}</Text>
-                  <Text>Date = {expense?.expenseDate}</Text>
-                  <Text>Category = {expense?.expenseTag}</Text>
-                </View>
-                <View>
-                  <TouchableOpacity onPress={() => deleteExpense(expense.id)}>
-                    <Text style={form.deleteButton}>Delete</Text>
-                  </TouchableOpacity>
-                </View>
-              </View>
-            </View>
-          ))
-        )}
+        <ExpenseList data={data} deleteExpense={deleteExpense} />
       </ScrollView>
 
       <Button icon="plus" style={styles.fab} textColor="#FFF" onPress={() => navigation.navigate("ExpenseForm")}>
