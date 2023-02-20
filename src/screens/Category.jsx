@@ -53,9 +53,9 @@ const Category = props => {
       </Button>
       
       {/* add a touchable opacity button to drop the table */}
-      <TouchableOpacity onPress={() => dropTable()}>
+      {/* <TouchableOpacity onPress={() => dropTable()}>
         <Text style={styles.bold}>Drop Table</Text>
-      </TouchableOpacity>
+      </TouchableOpacity> */}
       
     </View>
   )

@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Modal, Pressable } from "reac
 import uuid from "react-native-uuid"
 import { useNavigation } from "@react-navigation/native"
 import React, { useState } from "react"
-import { dbInsert,dropTable,dbInit } from "../../database/CategoryTable"
+import { dbInsert, dropTable, dbInit } from "../../database/CategoryTable"
 import { TextInput, Button } from "react-native-paper"
 import ColorPicker from 'react-native-wheel-color-picker';
 
@@ -47,15 +47,15 @@ const CategoryAdd = props => {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text>Pick the colour</Text>
-          <ColorPicker
-          color={color}
-          onColorChange={(color) => onColorChange(color)}
-          onColorChangeComplete={color => console.log(`Color selected: ${color}`)}
-          thumbSize={30}
-          sliderSize={30}
-          noSnap={true}
-          row={false}
-        />
+            <ColorPicker
+              color={color}
+              onColorChange={(color) => onColorChange(color)}
+              onColorChangeComplete={color => console.log(`Color selected: ${color}`)}
+              thumbSize={30}
+              sliderSize={30}
+              noSnap={true}
+              row={false}
+            />
             <Pressable
               style={[styles.button, styles.buttonClose]}
               onPress={colourSet}>
@@ -77,11 +77,11 @@ const CategoryAdd = props => {
         <TextInput mode="outlined" label="Enter a tag" value={task} onChangeText={text => setTask(text)} />
         <Text>Add a tag colour</Text>
         <TouchableOpacity style={{
-          backgroundColor:`${colorFinal}`,
+          backgroundColor: `${colorFinal}`,
           height: 24,
           width: 24,
-          borderRadius:12,
-          borderWidth:3,
+          borderRadius: 12,
+          borderWidth: 3,
         }} onPress={() => setModalVisible(true)}></TouchableOpacity>
         <View>
           <Button style={styles.btnArea} mode="contained" onPress={onSubmit}>
@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    marginTop:20
+    marginTop: 20
   },
   buttonOpen: {
     backgroundColor: '#F194FF',

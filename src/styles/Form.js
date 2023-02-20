@@ -54,7 +54,8 @@ const form = StyleSheet.create({
     alignItems: "center"
   },
   listLeft: {
-    width: "78%"
+    width: "78%",
+    flexDirection: 'column'
   },
   noData: {
     textAlign: "center",
