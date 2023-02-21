@@ -3,7 +3,7 @@
 A mobile application built using React Native that helps individuals track their daily finances. Users can input their expenses and the app will provide them with a clear overview of their financial situation. The app also offers useful features such as spending analysis with the help of graphs, and financial goal tracking to help users make informed decisions about their money. The user-friendly interface allows for an easy navigation and data entry, making it simple for users to stay on top of their finances on the go.
 
 # Team (Group 7)
-- Hitarth Barthkumar Kakkad
+- Hitarth Bharatkumar Kakkad
 - Christy Varghese
 - Jobson Plavunkal Varghese
 - Dwijen Girish Rathod
@@ -23,7 +23,7 @@ A mobile application built using React Native that helps individuals track their
 - Dark Theme
 
 # Specs
-- This project will be built using React Native - CLI and TypeScript
+- This project will be built using React Native - CLI and Javascript
 - User itself is the source of data.
 - This application targets both android as well as iOS platforms.
 - In this application, the users can add their own tags to sort out their daily expense.

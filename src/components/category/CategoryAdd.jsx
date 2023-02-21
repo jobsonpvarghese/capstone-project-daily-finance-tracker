@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TouchableOpacity, Modal, Pressable } from "react-native"
+import { StyleSheet, Text, View, TouchableOpacity, Modal, Pressable, Alert } from "react-native"
 import uuid from "react-native-uuid"
 import { useNavigation } from "@react-navigation/native"
 import React, { useState } from "react"
@@ -28,6 +28,9 @@ const CategoryAdd = props => {
       navigation.navigate("Category")
       // refreshVal()
     }
+  }
+  const onCancle = () => {
+    navigation.navigate("Category")
   }
   const colourSet = () => {
     setColorFinal(color)
@@ -87,6 +90,9 @@ const CategoryAdd = props => {
           <Button style={styles.btnArea} mode="contained" onPress={onSubmit}>
             Add
           </Button>
+          <Button style={styles.btnAreaCancle} mode="contained" onPress={onCancle}>
+            Cancle
+          </Button>
         </View>
       </View>
     </View>
@@ -103,6 +109,10 @@ const styles = StyleSheet.create({
   btnArea: {
     marginTop: 20,
     backgroundColor: "#F94A29"
+  },
+  btnAreaCancle: {
+    marginTop: 20,
+    backgroundColor: "#9c9c9c"
   },
   centeredView: {
     flex: 1,

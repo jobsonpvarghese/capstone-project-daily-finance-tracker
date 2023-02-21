@@ -61,7 +61,7 @@ const ExpenseFrom = props => {
         value={expenseTitle}
         onChangeText={title => setExpenseTitle(title)}
       />
-      <TextInput mode="outlined" label="Amount" placeholder="$" value={amount} onChangeText={amount => setAmount(amount)} />
+      <TextInput mode="outlined" keyboardType = 'numeric' label="Amount" placeholder="$" value={amount} onChangeText={amount => setAmount(amount)} />
       <TextInput mode="outlined" label="Enter the tag" placeholder=" " value={tag} onChangeText={tag => setTag(tag)} />
       <TextInput mode="outlined" label="Date" placeholder="ddmmyyyy" value={date} onChangeText={date => setDate(date)} />
       <TextInput mode="outlined" label="Source" placeholder="Income/Expense" value={expenseSource} onChangeText={source => setSource(source)} />

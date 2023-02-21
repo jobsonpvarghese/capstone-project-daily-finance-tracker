@@ -1,17 +1,16 @@
-import React, { useEffect, useState } from "react"
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native"
+import React, { useState } from "react"
+import { StyleSheet, View } from "react-native"
 import { Button, Dialog, Portal } from "react-native-paper"
 import CategoryList from "../components/category/CategoryList"
 import dashBoard from "../styles/Dashboard"
 import { useFocusEffect } from "@react-navigation/native"
 
 // db functions
-import { dbGetGames, dbInit, dropTable } from "../database/CategoryTable"
+import { dbGetGames, dbInit } from "../database/CategoryTable"
 
 const Category = props => {
   const { navigation } = props
   const [visible, setVisible] = React.useState(false)
-  const hideDialog = () => setVisible(false)
   const [formData, setFormData] = useState([])
 
   // Refresh data
@@ -51,12 +50,12 @@ const Category = props => {
       <Button icon="plus" style={styles.fab} mode="contained" onPress={() => navigation.navigate("CategoryAdd")}>
         Add Category
       </Button>
-      
+
       {/* add a touchable opacity button to drop the table */}
       {/* <TouchableOpacity onPress={() => dropTable()}>
         <Text style={styles.bold}>Drop Table</Text>
       </TouchableOpacity> */}
-      
+
     </View>
   )
 }
