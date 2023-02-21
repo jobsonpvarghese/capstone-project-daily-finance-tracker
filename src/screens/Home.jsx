@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react"
+import { useFocusEffect } from "@react-navigation/native"
+import React, { useCallback, useEffect, useState } from "react"
 import { Button, StyleSheet, Text, View } from "react-native"
 
 import { dbGetTotalBalance, dbGetTotalExpense, dbGetTotalIncome } from "../database/ExpenseTable"
@@ -10,9 +11,9 @@ const Home = props => {
   const [totalExpense, setTotalExpense] = useState("")
   const [totalBalance, setTotalBalance] = useState("")
 
-
-  useEffect(() => {
-    dbGetTotalIncome()
+  useFocusEffect(
+    useCallback(() => {
+      dbGetTotalIncome()
       .then(data => {
         setTotalIncome(data)
         console.log("Data", data)
@@ -38,8 +39,10 @@ const Home = props => {
       .catch(err => {
         console.log("Error", err)
       })
-  }, [])
-  
+    }, [])
+  )
+
+
   return (
     <View style={styles.container}>
       {/* Add 3 rectangular containers to hold the income, expense and the total balance */}
@@ -63,9 +66,6 @@ const Home = props => {
         <Text style={styles.balanceText}>Balance</Text>
         <Text style={styles.balanceText}>$ {totalBalance} </Text>
       </View>
-
-
-      
     </View>
   )
 }
