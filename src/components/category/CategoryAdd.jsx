@@ -49,7 +49,10 @@ const CategoryAdd = props => {
         }}>
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text>Pick the colour</Text>
+            <Text style={{
+              fontSize: 32, fontWeight: "bold", justifyContent: 'center',
+              alignItems: 'center', marginLeft:10
+            }}>Pick the colour</Text>
             <ColorPicker
               color={color}
               onColorChange={(color) => onColorChange(color)}
@@ -60,7 +63,7 @@ const CategoryAdd = props => {
               row={false}
             />
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button, styles.buttonOpen]}
               onPress={colourSet}>
               <Text style={styles.textStyle}>Save</Text>
             </Pressable>
@@ -142,10 +145,10 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   buttonOpen: {
-    backgroundColor: '#F194FF',
+    backgroundColor: '#F94A29',
   },
   buttonClose: {
-    backgroundColor: '#2196F3',
+    backgroundColor: '#9c9c9c',
   },
   textStyle: {
     color: 'white',
@@ -153,7 +156,7 @@ const styles = StyleSheet.create({
     textAlign: 'center',
   },
   modalText: {
-    marginBottom: 15,
+    marginBottom: 1,
     textAlign: 'center',
   },
 })

@@ -22,8 +22,9 @@ const dashBoard = StyleSheet.create({
     height: 30
   },
   title: {
-    fontSize: 20,
-    fontWeight: "bold"
+    fontSize: 37,
+    fontWeight: "bold",
+    paddingBottom: 10
   },
   deleteAll: {
     marginBottom: 20
