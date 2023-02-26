@@ -89,6 +89,74 @@ export const dbEditExpense = (id, expenseTitle, expenseAmount, expenseDate, expe
   })
 }
 
+// get the total sum of the income source from the database
+export const dbGetTotalIncome = () => {
+  const db = SQLite.openDatabase("expenses.db")
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `SELECT SUM(expenseAmount) AS totalIncome FROM expense WHERE expenseSource = 'Income'`,
+        [],
+        (_, result) => {
+          const tasks = result.rows._array.map(item => {
+            return item.totalIncome
+          })
+          resolve(tasks)
+        },
+        (_, err) => {
+          reject(err)
+        }
+      )
+    })
+  })
+}
+
+// get the total sum of the expense source from the database
+export const dbGetTotalExpense = () => {
+  const db = SQLite.openDatabase("expenses.db")
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `SELECT SUM(expenseAmount) AS totalExpense FROM expense WHERE expenseSource = 'Expense'`,
+        [],
+        (_, result) => {
+          const tasks = result.rows._array.map(item => {
+            return item.totalExpense
+          })
+          resolve(tasks)
+        },
+        (_, err) => {
+          reject(err)
+        }
+      )
+    })
+  })
+}
+
+// totalIncome - totalExpense 
+export const dbGetTotalBalance = () => {
+  const db = SQLite.openDatabase("expenses.db")
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        // totalIncome - totalExpense
+        `SELECT (SELECT SUM(expenseAmount) FROM expense WHERE expenseSource = 'Income') - (SELECT SUM(expenseAmount) FROM expense WHERE expenseSource = 'Expense') AS totalBalance`,
+        [],
+        (_, result) => {  
+          const tasks = result.rows._array.map(item => {
+            return item.totalBalance
+          })
+          resolve(tasks)
+        },
+        (_, err) => {
+          reject(err)
+        }
+      )
+    })
+  })
+}
+  
+
 // Delete a expense from the database
 export const dbDeleteExpense = id => {
   const db = SQLite.openDatabase("expenses.db")

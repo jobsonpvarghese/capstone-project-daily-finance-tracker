@@ -2,7 +2,6 @@ import { StyleSheet, Text, View } from "react-native"
 import React, { useState, useEffect } from "react"
 import { TextInput, Button } from "react-native-paper"
 import uuid from "react-native-uuid"
-// import DropDownPicker from "react-native-custom-dropdown";
 
 import { dbEditExpense, dbInsertExpense } from "../../database/ExpenseTable"
 
@@ -65,21 +64,6 @@ const ExpenseFrom = props => {
       <TextInput mode="outlined" label="Enter the tag" placeholder=" " value={tag} onChangeText={tag => setTag(tag)} />
       <TextInput mode="outlined" label="Date" placeholder="ddmmyyyy" value={date} onChangeText={date => setDate(date)} />
       <TextInput mode="outlined" label="Source" placeholder="Income/Expense" value={expenseSource} onChangeText={source => setSource(source)} />
-      {/* <DropDownPicker
-        items={[
-          { label: "Income", value: "Income" },
-          { label: "Expense", value: "Expense" },
-        ]}
-        defaultValue={expenseSource}
-        containerStyle={{ height: 40 }}
-        style={{ backgroundColor: "#fafafa" }}
-        itemStyle={{
-          justifyContent: "flex-start"
-        }}
-        dropDownStyle={{ backgroundColor: "#fafafa" }}
-        onChangeItem={item => setSource(item.value)}
-
-      /> */}
 
       <View style={styles.btnArea}>
         <Button style={{ borderColor: "#F94A29" }} icon="close" textColor="#F94A29" mode="outlined" onPress={() => navigation.navigate("Expenses")}>
