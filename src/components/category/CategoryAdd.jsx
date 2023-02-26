@@ -81,7 +81,7 @@ const CategoryAdd = props => {
       <View style={dashBoard.body}>
         <Text>Add a new tag</Text>
         <TextInput mode="outlined" label="Enter a tag" value={task} onChangeText={text => setTask(text)} />
-        <Text>Add a tag colour</Text>
+        <Text style={{paddingVertical:5}}>Add a tag colour</Text>
         <TouchableOpacity style={{
           backgroundColor: `${colorFinal}`,
           height: 24,

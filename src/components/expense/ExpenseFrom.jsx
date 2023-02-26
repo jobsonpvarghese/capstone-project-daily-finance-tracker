@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native"
 import React, { useState, useEffect } from "react"
 import { TextInput, Button } from "react-native-paper"
 import uuid from "react-native-uuid"
+import { DatePickerInput } from 'react-native-paper-dates';
 
 import { dbEditExpense, dbInsertExpense } from "../../database/ExpenseTable"
 
@@ -15,6 +16,7 @@ const ExpenseFrom = props => {
   const [amount, setAmount] = useState("")
   const [tag, setTag] = useState("")
   const [date, setDate] = useState("")
+  const [inputDate, setInputDate] = React.useState(undefined)
 
   // Dropdown options (income and expense)
   const [expenseSource, setSource] = useState("")
@@ -62,7 +64,16 @@ const ExpenseFrom = props => {
       />
       <TextInput mode="outlined" keyboardType = 'numeric' label="Amount" placeholder="$" value={amount} onChangeText={amount => setAmount(amount)} />
       <TextInput mode="outlined" label="Enter the tag" placeholder=" " value={tag} onChangeText={tag => setTag(tag)} />
-      <TextInput mode="outlined" label="Date" placeholder="ddmmyyyy" value={date} onChangeText={date => setDate(date)} />
+      {/* <TextInput mode="outlined" label="Date" placeholder="ddmmyyyy" value={date} onChangeText={date => setDate(date)} /> */}
+      <DatePickerInput
+          locale="en"
+          label="Date"
+          value={inputDate}
+          onChange={(d) => (setDate(d.toString()), setInputDate(d))}
+          inputMode="start"
+          mode={'outlined'}
+          style={{backgroundColor:' #FFFFFF'}}
+        />
       <TextInput mode="outlined" label="Source" placeholder="Income/Expense" value={expenseSource} onChangeText={source => setSource(source)} />
 
       <View style={styles.btnArea}>
