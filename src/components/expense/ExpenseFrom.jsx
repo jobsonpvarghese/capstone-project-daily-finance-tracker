@@ -2,7 +2,8 @@ import { StyleSheet, Text, View } from "react-native"
 import React, { useState, useEffect } from "react"
 import { TextInput, Button } from "react-native-paper"
 import uuid from "react-native-uuid"
-import { DatePickerInput } from 'react-native-paper-dates';
+import {Picker} from '@react-native-picker/picker';
+import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
 
 import { dbEditExpense, dbInsertExpense } from "../../database/ExpenseTable"
 
@@ -15,11 +16,11 @@ const ExpenseFrom = props => {
   const [expenseTitle, setExpenseTitle] = useState("")
   const [amount, setAmount] = useState("")
   const [tag, setTag] = useState("")
-  const [date, setDate] = useState("")
-  const [inputDate, setInputDate] = React.useState(undefined)
+  const [date, setDate] = useState(new Date())
+  // const [inputDate, setInputDate] = useState(new Date())
 
   // Dropdown options (income and expense)
-  const [expenseSource, setSource] = useState("")
+  const [expenseSource, setSource] = useState("Income")
 
 
   useEffect(() => {
@@ -64,17 +65,24 @@ const ExpenseFrom = props => {
       />
       <TextInput mode="outlined" keyboardType = 'numeric' label="Amount" placeholder="$" value={amount} onChangeText={amount => setAmount(amount)} />
       <TextInput mode="outlined" label="Enter the tag" placeholder=" " value={tag} onChangeText={tag => setTag(tag)} />
-      {/* <TextInput mode="outlined" label="Date" placeholder="ddmmyyyy" value={date} onChangeText={date => setDate(date)} /> */}
-      <DatePickerInput
-          locale="en"
-          label="Date"
-          value={inputDate}
-          onChange={(d) => (setDate(d.toString()), setInputDate(d))}
-          inputMode="start"
-          mode={'outlined'}
-          style={{backgroundColor:' #FFFFFF'}}
-        />
-      <TextInput mode="outlined" label="Source" placeholder="Income/Expense" value={expenseSource} onChangeText={source => setSource(source)} />
+
+
+      {/* ----------------- Date Picker -------------------- */}
+      <TextInput mode="outlined" label="Date" placeholder="ddmmyyyy" value={date} onChangeText={date => setDate(date)} />
+      <Calendar
+        monthFormat={'yyyy MM'}
+        onDayPress={day => {
+          setDate(day.dateString)
+        }}
+      />
+
+
+      {/*  ------------- Dropdown for income and expense --------------- */}
+      <Picker mode="dropdown" label="Source" selectedValue={expenseSource} onValueChange={(itemValue) => {setSource(itemValue)
+        }}>
+        <Picker.Item label="Income" value="Income" />
+        <Picker.Item label="Expense" value="Expense" />
+      </Picker>
 
       <View style={styles.btnArea}>
         <Button style={{ borderColor: "#F94A29" }} icon="close" textColor="#F94A29" mode="outlined" onPress={() => navigation.navigate("Expenses")}>
@@ -103,7 +111,7 @@ export default ExpenseFrom
 const styles = StyleSheet.create({
   container: {
     margin: 20,
-    marginTop: 150
+    
   },
   btnArea: {
     marginTop: 20,

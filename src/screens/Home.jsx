@@ -42,6 +42,7 @@ const Home = props => {
     }, [])
   )
 
+  console.log("Total Income", totalIncome)
 
   return (
     <View style={styles.container}>
