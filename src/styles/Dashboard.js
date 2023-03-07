@@ -28,7 +28,20 @@ const dashBoard = StyleSheet.create({
   },
   deleteAll: {
     marginBottom: 20
-  }
+  },
+  // },
+  // buttons: {
+  //   flexDirection: "row",
+  //   justifyContent: "space-between",
+  //   alignItems: "center",
+  //   margin: 20
+  // },
+  // addBtn, cancelBtn: {
+  //   width: 50,
+  //   height: 50,
+  //   borderRadius: 50,
+  //   backgroundColor: "#F94A29"
+  // },
 })
 
 export default dashBoard

@@ -6,7 +6,16 @@ const ExpenseList = props => {
   const { data, deleteExpense, navigation } = props
 
   return (
-    <View>
+    <View style={
+      {
+        flex: 1,
+        backgroundColor: "#fff",
+        alignItems: "center",
+        justifyContent: "center",
+        marginTop: 50
+
+      }
+    }>
       {data == "" ? (
         <Text style={styles.noData}>No data available</Text>
       ) : (

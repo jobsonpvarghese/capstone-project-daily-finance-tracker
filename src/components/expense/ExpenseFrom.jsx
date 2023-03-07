@@ -64,8 +64,24 @@ const ExpenseFrom = props => {
         onChangeText={title => setExpenseTitle(title)}
       />
       <TextInput mode="outlined" keyboardType = 'numeric' label="Amount" placeholder="$" value={amount} onChangeText={amount => setAmount(amount)} />
-      <TextInput mode="outlined" label="Enter the tag" placeholder=" " value={tag} onChangeText={tag => setTag(tag)} />
+      
+      
+      {/* <TextInput mode="outlined" label="Enter the tag" placeholder=" " value={tag} onChangeText={tag => setTag(tag)} /> */}
+      <Picker mode="dropdown" label="Tag" selectedValue={tag} onValueChange={(itemValue) => {setTag(itemValue)
+        }}>
+        <Picker.Item label="Food" value="Food" />
+        <Picker.Item label="Transport" value="Transport" />
+        <Picker.Item label="Shopping" value="Shopping" />
+        <Picker.Item label="Entertainment" value="Entertainment" />
+        <Picker.Item label="Others" value="Others" />
+      </Picker>
 
+      {/*  ------------- Dropdown for income and expense --------------- */}
+      <Picker mode="dropdown" label="Source" selectedValue={expenseSource} onValueChange={(itemValue) => {setSource(itemValue)
+        }}>
+        <Picker.Item label="Income" value="Income" />
+        <Picker.Item label="Expense" value="Expense" />
+      </Picker>
 
       {/* ----------------- Date Picker -------------------- */}
       <TextInput mode="outlined" label="Date" placeholder="ddmmyyyy" value={date} onChangeText={date => setDate(date)} />
@@ -77,12 +93,6 @@ const ExpenseFrom = props => {
       />
 
 
-      {/*  ------------- Dropdown for income and expense --------------- */}
-      <Picker mode="dropdown" label="Source" selectedValue={expenseSource} onValueChange={(itemValue) => {setSource(itemValue)
-        }}>
-        <Picker.Item label="Income" value="Income" />
-        <Picker.Item label="Expense" value="Expense" />
-      </Picker>
 
       <View style={styles.btnArea}>
         <Button style={{ borderColor: "#F94A29" }} icon="close" textColor="#F94A29" mode="outlined" onPress={() => navigation.navigate("Expenses")}>
@@ -111,6 +121,8 @@ export default ExpenseFrom
 const styles = StyleSheet.create({
   container: {
     margin: 20,
+    flex: 1,
+    marginTop: 50
     
   },
   btnArea: {

@@ -39,7 +39,9 @@ const form = StyleSheet.create({
   },
   view: {
     height: "87%",
-    marginVertical: 30
+    marginVertical: 30,
+    marginHorizontal: 20,
+    margin: 50
   },
   listitem: {
     backgroundColor: "#FFF7E9",

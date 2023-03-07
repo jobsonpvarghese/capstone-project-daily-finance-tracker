@@ -7,6 +7,7 @@ const App = () => {
   return (
     <>
       <StatusBar style="auto" />
+      {/* <Header /> */}
       {/* Route Component */}
       <Route />
     </>

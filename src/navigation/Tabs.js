@@ -18,7 +18,7 @@ const Tabs = () => {
       <Tab.Screen name="Home" component={Home} options={{ ...styles.home, ...styles.tabBarStyle, headerShown: false }} />
       <Tab.Screen name="Expenses" component={Expenses} options={{ ...styles.Expenses, ...styles.tabBarStyle, headerShown: false }} />
       <Tab.Screen name="Category" component={Category} options={{ ...styles.Category, ...styles.tabBarStyle, headerShown: false }} />
-      {/* <Tab.Screen name="Settings" component={Settings} options={{ ...styles.setting, ...styles.tabBarStyle, headerShown: false }} /> */}
+      <Tab.Screen name="Settings" component={Settings} options={{ ...styles.setting, ...styles.tabBarStyle, headerShown: false }} />
     </Tab.Navigator>
   )
 }

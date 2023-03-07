@@ -11,7 +11,7 @@ import dashBoard from "../../styles/Dashboard"
 const CategoryAdd = props => {
   const navigation = useNavigation()
   const [task, setTask] = useState("")
-  const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(true);
   const [color, setColor] = useState('#ffff');
   const [colorFinal, setColorFinal] = useState('#ffff');
   const onColorChange = color => {
@@ -29,7 +29,7 @@ const CategoryAdd = props => {
       // refreshVal()
     }
   }
-  const onCancle = () => {
+  const onCancel = () => {
     navigation.navigate("Category")
   }
   const colourSet = () => {
@@ -39,66 +39,59 @@ const CategoryAdd = props => {
 
   return (
     <View style={dashBoard.container}>
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          Alert.alert('Modal has been closed.');
-          setModalVisible(!modalVisible);
-        }}>
-        <View style={styles.centeredView}>
+      <Text style={dashBoard.title}>Add Category</Text>
+      <TextInput
+        mode="outlined"
+        label="Category"
+        value={task}
+        onChangeText={text => setTask(text)}
+        style={dashBoard.input}
+      />
+
+<View style={styles.centeredView}>
           <View style={styles.modalView}>
-            <Text style={{
-              fontSize: 32, fontWeight: "bold", justifyContent: 'center',
-              alignItems: 'center', marginLeft:10
-            }}>Pick the colour</Text>
             <ColorPicker
-              color={color}
-              onColorChange={(color) => onColorChange(color)}
-              onColorChangeComplete={color => console.log(`Color selected: ${color}`)}
-              thumbSize={30}
-              sliderSize={30}
-              noSnap={true}
-              row={false}
+              onColorChange={onColorChange}
+              sliderSize={20}
+              sliderOneMaximumValue={255}
+              sliderOneMinimumValue={0}
+              sliderOneStep={1}
+              sliderTwoMaximumValue={255}
+              sliderTwoMinimumValue={0}
+              sliderTwoStep={1}
+              sliderThreeMaximumValue={255}
+              sliderThreeMinimumValue={0}
+              sliderThreeStep={1}
+              initialColor={color}
+              style={{ width: 300, height: 300 }}
             />
-            <Pressable
-              style={[styles.button, styles.buttonOpen]}
-              onPress={colourSet}>
-              <Text style={styles.textStyle}>Save</Text>
-            </Pressable>
+
             <Pressable
               style={[styles.button, styles.buttonClose]}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={styles.textStyle}>Cancel</Text>
+              onPress={() => colourSet()}
+            >
+              <Text style={styles.textStyle}>Set Colour</Text>
+
             </Pressable>
+
           </View>
         </View>
-      </Modal>
-      <View style={dashBoard.header}>
-        <Text style={dashBoard.title}>Tag</Text>
+      <Button
+        mode="contained"
+        style={dashBoard.btnArea}
+        onPress={() => onSubmit()}
+      >
+        <Text style={dashBoard.btnText}>Add</Text>
+      </Button>
+
+      <Button
+        mode="contained"
+        style={dashBoard.btnAreaCancel}
+        onPress={() => onCancel()}
+      >
+        <Text style={dashBoard.btnText}>Cancel</Text>
+      </Button>
       </View>
-      <View style={dashBoard.body}>
-        <Text>Add a new tag</Text>
-        <TextInput mode="outlined" label="Enter a tag" value={task} onChangeText={text => setTask(text)} />
-        <Text style={{paddingVertical:5}}>Add a tag colour</Text>
-        <TouchableOpacity style={{
-          backgroundColor: `${colorFinal}`,
-          height: 24,
-          width: 24,
-          borderRadius: 12,
-          borderWidth: 3,
-        }} onPress={() => setModalVisible(true)}></TouchableOpacity>
-        <View>
-          <Button style={styles.btnArea} mode="contained" onPress={onSubmit}>
-            Add
-          </Button>
-          <Button style={styles.btnAreaCancle} mode="contained" onPress={onCancle}>
-            Cancle
-          </Button>
-        </View>
-      </View>
-    </View>
   )
 }
 
@@ -154,6 +147,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontWeight: 'bold',
     textAlign: 'center',
+    backgroundColor: '#9c9c9c',
   },
   modalText: {
     marginBottom: 1,

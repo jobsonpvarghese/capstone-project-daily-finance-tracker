@@ -58,7 +58,7 @@ const Home = props => {
       </View>
 
       <View style={styles.outcomeContainer}>
-        <Text style={styles.outcomeText}>Outcome</Text>
+        <Text style={styles.outcomeText}>Expense</Text>
         <Text style={styles.outcomeText}>$ {totalExpense} </Text>
       </View>
       </View>
