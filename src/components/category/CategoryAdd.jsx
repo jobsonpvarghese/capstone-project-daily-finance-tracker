@@ -66,12 +66,12 @@ const CategoryAdd = props => {
               style={{ width: 300, height: 300 }}
             />
 
+            {/* pressable button with the color from th color picker as the background */}
             <Pressable
-              style={[styles.button, styles.buttonClose]}
+              style={[styles.button]}
               onPress={() => colourSet()}
             >
-              <Text style={styles.textStyle}>Set Colour</Text>
-
+              <Text>Set Colour</Text>
             </Pressable>
 
           </View>
@@ -135,13 +135,12 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 10,
     elevation: 2,
-    marginTop: 20
+    marginTop: 20,
+    alignItems: 'center',
+    
   },
   buttonOpen: {
     backgroundColor: '#F94A29',
-  },
-  buttonClose: {
-    backgroundColor: '#9c9c9c',
   },
   textStyle: {
     color: 'white',
