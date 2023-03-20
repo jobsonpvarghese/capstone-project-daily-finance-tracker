@@ -1,4 +1,5 @@
 import * as SQLite from "expo-sqlite"
+import { it } from "react-native-paper-dates"
 
 // Open a database for expense which holds the id, expense title , expense amount, expense date and the tag
 export const dbInitExpense = () => {
@@ -8,7 +9,7 @@ export const dbInitExpense = () => {
     db.transaction(tx => {
       tx.executeSql(
         `CREATE TABLE IF NOT EXISTS expense (id VARCHAR PRIMARY KEY NOT NULL, expenseTitle TEXT NOT NULL, 
-            expenseAmount TEXT NOT NULL, expenseDate TEXT NOT NULL, expenseTag TEXT NOT NULL, expenseSource TEXT NOT NULL);`,
+            expenseAmount TEXT NOT NULL, expenseDate TEXT NOT NULL, expenseTag TEXT NOT NULL, expenseSource TEXT NOT NULL, expenseNote TEXT);`,
         [],
         () => {
           resolve()
@@ -22,14 +23,14 @@ export const dbInitExpense = () => {
 }
 
 // Insert a expense into the database
-export const dbInsertExpense = (id, expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource) => {
+export const dbInsertExpense = (id, expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource, expenseNote) => {
   const db = SQLite.openDatabase("expenses.db")
 
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        `INSERT INTO expense (id, expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource) VALUES (?, ?, ?, ?, ?, ?);`,
-        [id, expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource],
+        `INSERT INTO expense (id, expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource, expenseNote, expenseNote) VALUES (?, ?, ?, ?, ?, ?, ?, ?);`,
+        [id, expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource, expenseNote],
         (_, result) => {
           resolve(result)
         },
@@ -58,7 +59,8 @@ export const dbGetExpenses = () => {
               expenseAmount: item.expenseAmount,
               expenseDate: item.expenseDate,
               expenseTag: item.expenseTag,
-              expenseSource: item.expenseSource
+              expenseSource: item.expenseSource,
+              expenseNote: item.expenseNote
             }
           })
           resolve(tasks)
@@ -71,13 +73,13 @@ export const dbGetExpenses = () => {
   })
 }
 // edit a expense from the database
-export const dbEditExpense = (id, expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource) => {
+export const dbEditExpense = (id, expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource,expenseNote) => {
   const db = SQLite.openDatabase("expenses.db")
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
       tx.executeSql(
-        `UPDATE expense SET expenseTitle = ?, expenseAmount = ?, expenseDate = ?, expenseTag = ?, expenseSource = ? WHERE id = ?;`,
-        [expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource, id],
+        `UPDATE expense SET expenseTitle = ?, expenseAmount = ?, expenseDate = ?, expenseTag = ?, expenseSource = ?, expenseNote = ? WHERE id = ?;`,
+        [expenseTitle, expenseAmount, expenseDate, expenseTag, expenseSource,expenseNote, id],
         (_, result) => {
           resolve(result)
         },

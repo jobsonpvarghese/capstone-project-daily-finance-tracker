@@ -5,7 +5,7 @@ import form from "../styles/Form.js"
 import { useFocusEffect } from "@react-navigation/native"
 
 // database functions
-import { dbInitExpense, dbGetExpenses, dbDeleteExpense } from "../database/ExpenseTable"
+import { dbInitExpense, dbGetExpenses, dbDeleteExpense ,dropTableexpense} from "../database/ExpenseTable"
 import ExpenseList from "../components/expense/ExpenseList.jsx"
 import { dbGetTag } from "../database/CategoryTable.js"
 
@@ -75,6 +75,9 @@ const Expenses = props => {
     <View style={styles.container}>
       <ScrollView style={form.view}>
         <ExpenseList data={data} tagData={tag} deleteExpense={deleteExpense} navigation={navigation} />
+        <TouchableOpacity onPress={() => dropTableexpense()}>
+        <Text style={styles.bold}>Drop Table</Text>
+      </TouchableOpacity>
       </ScrollView>
 
       <Button

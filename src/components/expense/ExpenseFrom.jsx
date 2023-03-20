@@ -13,8 +13,9 @@ const ExpenseFrom = props => {
   const action = props?.route?.params?.action
   const data = props?.route?.params?.data
 
-  // hooks for expense title, amount, tag and date
+  // hooks for expense title, amount, tag, note and date
   const [expenseTitle, setExpenseTitle] = useState("")
+  const [expenseNote, setExpenseNote] = useState("")
   const [amount, setAmount] = useState("")
   const [tag, setTag] = useState("")
   const [date, setDate] = useState(new Date())
@@ -31,6 +32,7 @@ const ExpenseFrom = props => {
       setTag(data.expenseTag)
       setDate(data.expenseDate)
       setSource(data.expenseSource)
+      setExpenseNote(data.setExpenseNote)
     }
 
     dbGetTag()
@@ -45,10 +47,10 @@ const ExpenseFrom = props => {
   // function to add expense
   const onClickAction = () => {
     if (action.toUpperCase() === "ADD") {
-      dbInsertExpense(uuid.v4(), expenseTitle, amount, date, tag, expenseSource)
+      dbInsertExpense(uuid.v4(), expenseTitle, amount, date, tag, expenseSource,expenseNote)
       navigation.navigate("Expenses")
     } else {
-      dbEditExpense(data.id, expenseTitle, amount, date, tag, expenseSource)
+      dbEditExpense(data.id, expenseTitle, amount, date, tag, expenseSource, expenseNote)
       navigation.navigate("Expenses")
     }
   }
@@ -71,6 +73,13 @@ const ExpenseFrom = props => {
         placeholder="Enter you expense label"
         value={expenseTitle}
         onChangeText={title => setExpenseTitle(title)}
+      />
+       <TextInput
+        mode="outlined"
+        label="Expense Note"
+        placeholder="Enter you Note"
+        value={expenseNote}
+        onChangeText={Note => setExpenseNote(Note)}
       />
       <TextInput mode="outlined" keyboardType="numeric" label="Amount" placeholder="$" value={amount} onChangeText={amount => setAmount(amount)} />
 

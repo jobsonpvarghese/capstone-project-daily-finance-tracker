@@ -1,6 +1,6 @@
 import { useFocusEffect } from "@react-navigation/native"
 import React, { useCallback, useEffect, useState } from "react"
-import { Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native"
+import { Dimensions, Image, ScrollView, StyleSheet, Text, View, TouchableOpacity } from "react-native"
 import UIBarCharts from "../components/charts/BarCharts"
 import UIPieChart from "../components/charts/PieChart"
 import { dbGetTag } from "../database/CategoryTable"
@@ -64,8 +64,8 @@ const Home = props => {
       // dropTableexpense()
     }, [])
 
-    
-    
+
+
   )
 
   let tagLabel = []
@@ -105,6 +105,10 @@ const Home = props => {
         </View>
         <Text style={styles.headerP}>Welcome to the Expense tracker dashboard. You can track your expenses here! </Text>
       </View>
+      {/* add a touchable opacity button to drop the table */}
+      <TouchableOpacity onPress={() => dropTableexpense()}>
+        <Text style={styles.bold}>Drop Table</Text>
+      </TouchableOpacity>
       <ScrollView>
         <View style={styles.pieChart}>
           <UIPieChart title="Summary" totalIncome={totalIncome} totalExpense={totalExpense} totalBalance={totalBalance} />

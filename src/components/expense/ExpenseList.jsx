@@ -36,6 +36,7 @@ const ExpenseList = props => {
                     {expense?.expenseTitle}
                   </Text>
                   <Text style={{ fontSize: 12, color: "gray" }}>$ {expense?.expenseAmount}</Text>
+                  <Text style={{ fontSize: 12, color: "gray" }}>Note- {expense?.expenseNote}</Text>
                 </View>
               </View>
               <View style={styles.buttonArea}>
@@ -69,7 +70,7 @@ const ExpenseList = props => {
                   flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: `${tagData.find(tag => tag.tag == expense.expenseTag).color}`,
+                  // backgroundColor: `${tagData.find(tag => tag.tag == expense.expenseTag).color}`,
                   padding: 5,
                   borderRadius: 5
                 }}
