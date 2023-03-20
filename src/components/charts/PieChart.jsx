@@ -14,14 +14,14 @@ const UIPieChart = props => {
       <PieChart
         data={[
           {
-            name: "Income",
+            name: "$ Income",
             population: props.totalIncome[0] ?? 0,
             color: "#BFDB38",
             legendFontColor: "#7F7F7F",
             legendFontSize: 15
           },
           {
-            name: "Expense",
+            name: "$ Expense",
             population: props.totalExpense[0] ?? 0,
             color: "#F94A29",
             legendFontColor: "#7F7F7F",

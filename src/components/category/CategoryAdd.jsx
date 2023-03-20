@@ -15,7 +15,7 @@ const CategoryAdd = props => {
   const [color, setColor] = useState('#ffff');
   const [colorFinal, setColorFinal] = useState('#ffff');
   const onColorChange = color => {
-    setColor(color);
+    setColorFinal(color);
   };
 
   // Add gamelist
@@ -23,6 +23,7 @@ const CategoryAdd = props => {
     if (task === "") {
       Alert.alert("Invalid", "Please enter a category", [{ text: "OK" }])
     } else {
+      setColorFinal(color)
       dbInsert(uuid.v4(), task, `${colorFinal}`)
       setTask("")
       navigation.navigate("Category")
@@ -31,10 +32,6 @@ const CategoryAdd = props => {
   }
   const onCancel = () => {
     navigation.navigate("Category")
-  }
-  const colourSet = () => {
-    setColorFinal(color)
-    setModalVisible(!modalVisible)
   }
 
   return (
@@ -65,15 +62,6 @@ const CategoryAdd = props => {
               initialColor={color}
               style={{ width: 300, height: 300 }}
             />
-
-            {/* pressable button with the color from th color picker as the background */}
-            <Pressable
-              style={[styles.button]}
-              onPress={() => colourSet()}
-            >
-              <Text>Set Colour</Text>
-            </Pressable>
-
           </View>
         </View>
       <Button
@@ -121,6 +109,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     borderRadius: 20,
     padding: 35,
+    height:385,
 
     shadowColor: '#000',
     shadowOffset: {

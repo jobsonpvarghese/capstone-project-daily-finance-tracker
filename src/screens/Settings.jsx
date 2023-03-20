@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from "react-native"
 const Settings = () => {
   return (
     <View style={styles.container}>
-      // Make a date picker where it can select the date and time 
+      {/* // Make a date picker where it can select the date and time 
       // Make a button that can change the background of the app
       
       // Make a button that can change the theme of the app
@@ -12,7 +12,7 @@ const Settings = () => {
       // Make a button that can change the language of the app
       // Make a button that can change the currency of the app
       
-      // Make a button that can change the font of the app
+      // Make a button that can change the font of the app */}
       
     </View>
   )

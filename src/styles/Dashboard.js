@@ -34,7 +34,8 @@ const dashBoard = StyleSheet.create({
     fontSize: 14,
   },
   btnArea: {
-    marginBottom: 20
+    marginBottom: 20,
+    marginTop:25
   },
   btnAreaCancel: {
     marginBottom: 20,

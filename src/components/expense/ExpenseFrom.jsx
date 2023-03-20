@@ -47,7 +47,7 @@ const ExpenseFrom = props => {
   // function to add expense
   const onClickAction = () => {
     if (action.toUpperCase() === "ADD") {
-      dbInsertExpense(uuid.v4(), expenseTitle, amount, date, tag, expenseSource,expenseNote)
+      dbInsertExpense(uuid.v4(), expenseTitle, amount, date, tag, expenseSource, expenseNote)
       navigation.navigate("Expenses")
     } else {
       dbEditExpense(data.id, expenseTitle, amount, date, tag, expenseSource, expenseNote)
@@ -74,15 +74,14 @@ const ExpenseFrom = props => {
         value={expenseTitle}
         onChangeText={title => setExpenseTitle(title)}
       />
-       <TextInput
+      <TextInput mode="outlined" keyboardType="numeric" label="Amount" placeholder="$" value={amount} onChangeText={amount => setAmount(amount)} />
+      <TextInput
         mode="outlined"
         label="Expense Note"
         placeholder="Enter you Note"
         value={expenseNote}
         onChangeText={Note => setExpenseNote(Note)}
       />
-      <TextInput mode="outlined" keyboardType="numeric" label="Amount" placeholder="$" value={amount} onChangeText={amount => setAmount(amount)} />
-
       {/* <TextInput mode="outlined" label="Enter the tag" placeholder=" " value={tag} onChangeText={tag => setTag(tag)} /> */}
       <Picker
         mode="dropdown"
@@ -106,8 +105,8 @@ const ExpenseFrom = props => {
           setSource(itemValue)
         }}
       >
-        <Picker.Item label="Income" value="Income" />
         <Picker.Item label="Expense" value="Expense" />
+        <Picker.Item label="Income" value="Income" />
       </Picker>
 
       {/* ----------------- Date Picker -------------------- */}
