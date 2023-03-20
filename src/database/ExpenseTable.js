@@ -133,7 +133,7 @@ export const dbGetTotalExpense = () => {
   })
 }
 
-// totalIncome - totalExpense 
+// totalIncome - totalExpense
 export const dbGetTotalBalance = () => {
   const db = SQLite.openDatabase("expenses.db")
   return new Promise((resolve, reject) => {
@@ -142,7 +142,7 @@ export const dbGetTotalBalance = () => {
         // totalIncome - totalExpense
         `SELECT (SELECT SUM(expenseAmount) FROM expense WHERE expenseSource = 'Income') - (SELECT SUM(expenseAmount) FROM expense WHERE expenseSource = 'Expense') AS totalBalance`,
         [],
-        (_, result) => {  
+        (_, result) => {
           const tasks = result.rows._array.map(item => {
             return item.totalBalance
           })
@@ -155,7 +155,6 @@ export const dbGetTotalBalance = () => {
     })
   })
 }
-  
 
 // Delete a expense from the database
 export const dbDeleteExpense = id => {
@@ -166,6 +165,25 @@ export const dbDeleteExpense = id => {
       tx.executeSql(
         `DELETE FROM expense WHERE id = ?;`,
         [id],
+        (_, result) => {
+          resolve(result)
+        },
+        (_, err) => {
+          reject(err)
+        }
+      )
+    })
+  })
+}
+
+// drop
+export const dropTableexpense = () => {
+  const db = SQLite.openDatabase("expenses.db")
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `DROP TABLE expense;`,
+        [],
         (_, result) => {
           resolve(result)
         },
