@@ -1,6 +1,6 @@
 import { useFocusEffect } from "@react-navigation/native"
 import React, { useCallback, useEffect, useState } from "react"
-import { Image, StyleSheet, Text, View } from "react-native"
+import { Dimensions, Image, ScrollView, StyleSheet, Text, View } from "react-native"
 import UIBarCharts from "../components/charts/BarCharts"
 import UIPieChart from "../components/charts/PieChart"
 import { dbGetTag } from "../database/CategoryTable"
@@ -105,12 +105,14 @@ const Home = props => {
         </View>
         <Text style={styles.headerP}>Welcome to the Expense tracker dashboard. You can track your expenses here! </Text>
       </View>
-      <View style={styles.pieChart}>
-        <UIPieChart title="Summary" totalIncome={totalIncome} totalExpense={totalExpense} totalBalance={totalBalance} />
-      </View>
-      <View style={styles.barChart}>
-        <UIBarCharts title={"Category wise summary"} tagLabel={tagLabel} tagAmount={tagAmount} />
-      </View>
+      <ScrollView>
+        <View style={styles.pieChart}>
+          <UIPieChart title="Summary" totalIncome={totalIncome} totalExpense={totalExpense} totalBalance={totalBalance} />
+        </View>
+        <View style={styles.barChart}>
+          <UIBarCharts title={"Category wise summary"} tagLabel={tagLabel} tagAmount={tagAmount} />
+        </View>
+      </ScrollView>
     </View>
   )
 }
