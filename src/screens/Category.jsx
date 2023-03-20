@@ -6,7 +6,7 @@ import dashBoard from "../styles/Dashboard"
 import { useFocusEffect } from "@react-navigation/native"
 
 // db functions
-import { dbGetGames, dbInit } from "../database/CategoryTable"
+import { dbGetTag, dbInit } from "../database/CategoryTable"
 
 const Category = props => {
   const { navigation } = props
@@ -15,7 +15,7 @@ const Category = props => {
 
   // Refresh data
   const refreshVal = () => {
-    dbGetGames().then(data => {
+    dbGetTag().then(data => {
       setFormData(data)
     })
   }
@@ -23,7 +23,7 @@ const Category = props => {
   useFocusEffect(
     React.useCallback(() => {
       dbInit()
-        .then(() => dbGetGames())
+        .then(() => dbGetTag())
         .then(data => {
           setFormData(data)
         })
@@ -55,7 +55,6 @@ const Category = props => {
       {/* <TouchableOpacity onPress={() => dropTable()}>
         <Text style={styles.bold}>Drop Table</Text>
       </TouchableOpacity> */}
-
     </View>
   )
 }

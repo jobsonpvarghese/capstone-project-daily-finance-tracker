@@ -3,19 +3,18 @@ import React from "react"
 import { MaterialCommunityIcons } from "react-native-vector-icons"
 
 const ExpenseList = props => {
-  const { data, deleteExpense, navigation } = props
+  const { data, tagData, deleteExpense, navigation } = props
 
   return (
-    <View style={
-      {
+    <View
+      style={{
         flex: 1,
         backgroundColor: "#fff",
         alignItems: "center",
         justifyContent: "center",
         marginTop: 50
-
-      }
-    }>
+      }}
+    >
       {data == "" ? (
         <Text style={styles.noData}>No data available</Text>
       ) : (
@@ -70,12 +69,12 @@ const ExpenseList = props => {
                   flexDirection: "row",
                   alignItems: "center",
                   justifyContent: "center",
-                  backgroundColor: "green",
+                  backgroundColor: `${tagData.find(tag => tag.tag == expense.expenseTag).color}`,
                   padding: 5,
                   borderRadius: 5
                 }}
               >
-                <Text style={{ fontSize: 12, color: "white" }}>{expense?.expenseTag}</Text>
+                <Text style={{ fontSize: 12 }}>{expense?.expenseTag}</Text>
               </View>
             </View>
           </View>

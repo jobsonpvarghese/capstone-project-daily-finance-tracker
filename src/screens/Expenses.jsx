@@ -7,10 +7,12 @@ import { useFocusEffect } from "@react-navigation/native"
 // database functions
 import { dbInitExpense, dbGetExpenses, dbDeleteExpense } from "../database/ExpenseTable"
 import ExpenseList from "../components/expense/ExpenseList.jsx"
+import { dbGetTag } from "../database/CategoryTable.js"
 
 const Expenses = props => {
   const { navigation } = props
   const [data, setData] = useState([])
+  const [tag, setTag] = useState([])
 
   // Refresh data
   const refreshVal = () => {
@@ -40,6 +42,15 @@ const Expenses = props => {
         .finally(() => {
           console.log("Database initialized")
         })
+
+      dbGetTag()
+        .then(data => {
+          setTag(data)
+        })
+        .catch(err => {
+          console.log("Error", err)
+        })
+
       // Do something when the screen is focused
       return () => {
         console.log("Screen was unfocused")
@@ -63,7 +74,7 @@ const Expenses = props => {
   return (
     <View style={styles.container}>
       <ScrollView style={form.view}>
-        <ExpenseList data={data} deleteExpense={deleteExpense} navigation={navigation} />
+        <ExpenseList data={data} tagData={tag} deleteExpense={deleteExpense} navigation={navigation} />
       </ScrollView>
 
       <Button

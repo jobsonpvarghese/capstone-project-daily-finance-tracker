@@ -2,10 +2,11 @@ import { StyleSheet, Text, View } from "react-native"
 import React, { useState, useEffect } from "react"
 import { TextInput, Button } from "react-native-paper"
 import uuid from "react-native-uuid"
-import {Picker} from '@react-native-picker/picker';
-import {Calendar, CalendarList, Agenda} from 'react-native-calendars';
+import { Picker } from "@react-native-picker/picker"
+import { Calendar, CalendarList, Agenda } from "react-native-calendars"
 
 import { dbEditExpense, dbInsertExpense } from "../../database/ExpenseTable"
+import { dbGetTag } from "../../database/CategoryTable"
 
 const ExpenseFrom = props => {
   const { navigation } = props
@@ -21,7 +22,7 @@ const ExpenseFrom = props => {
 
   // Dropdown options (income and expense)
   const [expenseSource, setSource] = useState("Income")
-
+  const [tagData, setTagData] = useState([])
 
   useEffect(() => {
     if (action.toUpperCase() === "EDIT") {
@@ -31,6 +32,14 @@ const ExpenseFrom = props => {
       setDate(data.expenseDate)
       setSource(data.expenseSource)
     }
+
+    dbGetTag()
+      .then(data => {
+        setTagData(data)
+      })
+      .catch(err => {
+        console.log("Error", err)
+      })
   }, [])
 
   // function to add expense
@@ -63,22 +72,31 @@ const ExpenseFrom = props => {
         value={expenseTitle}
         onChangeText={title => setExpenseTitle(title)}
       />
-      <TextInput mode="outlined" keyboardType = 'numeric' label="Amount" placeholder="$" value={amount} onChangeText={amount => setAmount(amount)} />
-      
-      
+      <TextInput mode="outlined" keyboardType="numeric" label="Amount" placeholder="$" value={amount} onChangeText={amount => setAmount(amount)} />
+
       {/* <TextInput mode="outlined" label="Enter the tag" placeholder=" " value={tag} onChangeText={tag => setTag(tag)} /> */}
-      <Picker mode="dropdown" label="Tag" selectedValue={tag} onValueChange={(itemValue) => {setTag(itemValue)
-        }}>
-        <Picker.Item label="Food" value="Food" />
-        <Picker.Item label="Transport" value="Transport" />
-        <Picker.Item label="Shopping" value="Shopping" />
-        <Picker.Item label="Entertainment" value="Entertainment" />
-        <Picker.Item label="Others" value="Others" />
+      <Picker
+        mode="dropdown"
+        label="Tag"
+        selectedValue={tag}
+        onValueChange={itemValue => {
+          setTag(itemValue)
+        }}
+      >
+        {tagData.map((item, index) => {
+          return <Picker.Item label={item.tag} value={item.tag} key={index} />
+        })}
       </Picker>
 
       {/*  ------------- Dropdown for income and expense --------------- */}
-      <Picker mode="dropdown" label="Source" selectedValue={expenseSource} onValueChange={(itemValue) => {setSource(itemValue)
-        }}>
+      <Picker
+        mode="dropdown"
+        label="Source"
+        selectedValue={expenseSource}
+        onValueChange={itemValue => {
+          setSource(itemValue)
+        }}
+      >
         <Picker.Item label="Income" value="Income" />
         <Picker.Item label="Expense" value="Expense" />
       </Picker>
@@ -86,13 +104,11 @@ const ExpenseFrom = props => {
       {/* ----------------- Date Picker -------------------- */}
       <TextInput mode="outlined" label="Date" placeholder="ddmmyyyy" value={date} onChangeText={date => setDate(date)} />
       <Calendar
-        monthFormat={'yyyy MM'}
+        monthFormat={"yyyy MM"}
         onDayPress={day => {
           setDate(day.dateString)
         }}
       />
-
-
 
       <View style={styles.btnArea}>
         <Button style={{ borderColor: "#F94A29" }} icon="close" textColor="#F94A29" mode="outlined" onPress={() => navigation.navigate("Expenses")}>
@@ -123,7 +139,6 @@ const styles = StyleSheet.create({
     margin: 20,
     flex: 1,
     marginTop: 50
-    
   },
   btnArea: {
     marginTop: 20,

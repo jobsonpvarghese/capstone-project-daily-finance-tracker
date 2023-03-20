@@ -17,7 +17,7 @@ export const dbInit = () => {
     })
   })
 } // Insert a game into the database
-export const dbGetGames = () => {
+export const dbGetTag = () => {
   const db = SQLite.openDatabase("category.db")
   return new Promise((resolve, reject) => {
     db.transaction(tx => {
@@ -26,7 +26,7 @@ export const dbGetGames = () => {
         [],
         (_, result) => {
           const tasks = result.rows._array.map(item => {
-            return { id: item.id, game: item.game, color: item.color }
+            return { id: item.id, tag: item.game, color: item.color }
           })
           resolve(tasks)
         },

@@ -57,7 +57,7 @@ const CategoryList = ({ data, refreshVal }) => {
                       fontWeight: "bold"
                     }}
                   >
-                    {game?.game}
+                    {game?.tag}
                   </Text>
                 </View>
                 {/* Show the color of the tag */}

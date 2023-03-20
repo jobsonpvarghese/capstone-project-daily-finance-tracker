@@ -1,65 +1,11 @@
 import { useFocusEffect } from "@react-navigation/native"
 import React, { useCallback, useEffect, useState } from "react"
-import { Button, StyleSheet, Text, View, Dimensions } from "react-native"
+import { Image, StyleSheet, Text, View } from "react-native"
+import UIBarCharts from "../components/charts/BarCharts"
+import UIPieChart from "../components/charts/PieChart"
+import { dbGetTag } from "../database/CategoryTable"
 
-import { dbGetTotalBalance, dbGetTotalExpense, dbGetTotalIncome, dropTableexpense } from "../database/ExpenseTable"
-import { PieChart } from "react-native-chart-kit"
-
-const MyPieChart = props => {
-  const { totalIncome, totalExpense, totalBalance } = props
-
-  console.log(props.totalIncome[0], props.totalExpense[0], props.totalBalance[0])
-  return (
-    <>
-      <Text style={styles.header}>Summary</Text>
-      <PieChart
-        data={[
-          {
-            name: "Income",
-            population: props.totalIncome[0] ?? 0,
-            color: "#BFDB38",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-          },
-          {
-            name: "Expense",
-            population: props.totalExpense[0] ?? 0,
-            color: "#FC7300",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-          },
-          {
-            name: "Balance",
-            population: props.totalBalance[0] ?? 0,
-            color: "#0081B4",
-            legendFontColor: "#7F7F7F",
-            legendFontSize: 15
-          }
-        ]}
-        width={Dimensions.get("window").width - 16}
-        height={220}
-        chartConfig={{
-          backgroundColor: "#1cc910",
-          backgroundGradientFrom: "#eff3ff",
-          backgroundGradientTo: "#efefef",
-          decimalPlaces: 2,
-          color: (opacity = 1) => `rgba(0, 0, 0, ${opacity})`,
-          style: {
-            borderRadius: 16
-          }
-        }}
-        style={{
-          marginVertical: 8,
-          borderRadius: 16
-        }}
-        accessor="population"
-        backgroundColor="transparent"
-        paddingLeft="15"
-        absolute //for the absolute number remove if you want percentage
-      />
-    </>
-  )
-}
+import { dbGetExpenses, dbGetTotalBalance, dbGetTotalExpense, dbGetTotalIncome, dropTableexpense } from "../database/ExpenseTable"
 
 const Home = props => {
   const { navigation } = props
@@ -67,6 +13,9 @@ const Home = props => {
   const [totalIncome, setTotalIncome] = useState("")
   const [totalExpense, setTotalExpense] = useState("")
   const [totalBalance, setTotalBalance] = useState("")
+
+  const [expenses, setExpenes] = useState([])
+  const [tag, setTag] = useState([])
 
   useFocusEffect(
     useCallback(() => {
@@ -93,37 +42,70 @@ const Home = props => {
         .catch(err => {
           console.log("Error", err)
         })
+
+      dbGetExpenses()
+        .then(data => {
+          setExpenes(data)
+        })
+        .catch(err => {
+          console.log("Error", err)
+        })
+
+      dbGetTag()
+        .then(data => {
+          setTag(data)
+        })
+        .catch(err => {
+          console.log("Error", err)
+        })
+
       // dropTable()
       // dropTableexpense()
     }, [])
   )
 
+  let tagLabel = []
+
+  tag.filter((item, i) => {
+    tagLabel.push(item.tag)
+  })
+  // calculating tag amount and storing as an array
+  let tagAmount = []
+  tag.filter((item, i) => {
+    let amount = 0
+    expenses.filter((expense, i) => {
+      if (item.tag === expense.expenseTag) {
+        amount += Number(expense.expenseAmount)
+      }
+    })
+    tagAmount.push(amount)
+  })
+
   return (
     <View style={styles.container}>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-          alignItems: "center"
-        }}
-      >
-        <View style={styles.incomeContainer}>
-          <Text style={styles.incomeText}>Income</Text>
-          <Text style={styles.incomeText}>$ {totalIncome} </Text>
+      <View style={styles.headerContainer}>
+        <View
+          style={{
+            flexDirection: "row"
+          }}
+        >
+          <Text style={styles.headerText}>Hi John Doe</Text>
+          <Image
+            style={{
+              width: 25,
+              height: 25,
+              marginLeft: 10
+            }}
+            source={require("../assets/icons/goodbye.png")}
+          />
         </View>
-
-        <View style={styles.outcomeContainer}>
-          <Text style={styles.outcomeText}>Expense</Text>
-          <Text style={styles.outcomeText}>$ {totalExpense} </Text>
-        </View>
+        <Text style={styles.headerP}>Welcome to the Expense tracker dashboard. You can track your expenses here! </Text>
       </View>
-
-      <View style={styles.balanceContainer}>
-        <Text style={styles.balanceText}>Balance</Text>
-        <Text style={styles.balanceText}>$ {totalBalance} </Text>
+      <View style={styles.pieChart}>
+        <UIPieChart title="Summary" totalIncome={totalIncome} totalExpense={totalExpense} totalBalance={totalBalance} />
       </View>
-      <View>
-        <MyPieChart totalIncome={totalIncome} totalExpense={totalExpense} totalBalance={totalBalance} />
+      <View style={styles.barChart}>
+        <UIBarCharts title={"Category wise summary"} tagLabel={tagLabel} tagAmount={tagAmount} />
       </View>
     </View>
   )
@@ -133,65 +115,23 @@ const styles = StyleSheet.create({
   container: {
     marginTop: 50
   },
-  incomeText: {
+  headerText: {
     color: "#FFF",
-    fontSize: 20,
-    fontWeight: "bold"
-  },
-  outcomeText: {
-    color: "#FFF",
-    fontSize: 20,
-    fontWeight: "bold"
-  },
-  balanceText: {
-    color: "#FFF",
-    fontSize: 20,
+    fontSize: 18,
     fontWeight: "bold"
   },
   bold: {
     fontWeight: "bold"
   },
-  incomeContainer: {
-    margin: 10,
-    backgroundColor: "#BFDB38",
-    width: "45%",
-    height: 100,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
+  headerP: {
+    color: "#FFF",
+    fontSize: 14
   },
-  outcomeContainer: {
+  headerContainer: {
+    padding: 10,
     margin: 10,
-    backgroundColor: "#FC7300",
-    width: "45%",
-    height: 100,
-    alignItems: "center",
-    justifyContent: "center",
-    borderRadius: 10,
-    shadowColor: "#000",
-    shadowOffset: {
-      width: 0,
-      height: 2
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 5
-  },
-  balanceContainer: {
-    margin: 10,
-    backgroundColor: "#0081B4",
+    backgroundColor: "#F94A29",
 
-    height: 100,
-    alignItems: "center",
-    justifyContent: "center",
     borderRadius: 10,
     shadowColor: "#000",
     shadowOffset: {
@@ -201,6 +141,37 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5
+  },
+  pieChart: {
+    backgroundColor: "#FFF",
+    padding: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2
+  },
+  barChart: {
+    backgroundColor: "#FFF",
+    padding: 10,
+    marginTop: 10,
+    marginLeft: 10,
+    marginRight: 10,
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 1
+    },
+    shadowOpacity: 0.2,
+    shadowRadius: 1.41,
+    elevation: 2
   }
 })
 
