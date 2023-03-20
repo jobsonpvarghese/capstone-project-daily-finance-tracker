@@ -156,6 +156,30 @@ export const dbGetTotalBalance = () => {
   })
 }
 
+// Get the average expense amount from the database
+export const dbGetAverageExpense = () => {
+  const db = SQLite.openDatabase("expenses.db")
+  return new Promise((resolve, reject) => {
+    db.transaction(tx => {
+      tx.executeSql(
+        `SELECT AVG(expenseAmount) AS averageExpense FROM expense WHERE expenseSource = 'Expense'`,
+        [],
+        (_, result) => {
+          const tasks = result.rows._array.map(item => {
+            return item.averageExpense
+          })
+          resolve(tasks)
+        },
+        (_, err) => {
+          reject(err)
+        }
+      )
+    })
+  })
+}
+
+  
+
 // Delete a expense from the database
 export const dbDeleteExpense = id => {
   const db = SQLite.openDatabase("expenses.db")

@@ -5,7 +5,11 @@ import UIBarCharts from "../components/charts/BarCharts"
 import UIPieChart from "../components/charts/PieChart"
 import { dbGetTag } from "../database/CategoryTable"
 
+<<<<<<< HEAD
 import { dbGetExpenses, dbGetTotalBalance, dbGetTotalExpense, dbGetTotalIncome, dropTableexpense } from "../database/ExpenseTable"
+=======
+import { dbGetTotalBalance, dbGetTotalExpense, dbGetTotalIncome, dbGetAverageExpense } from "../database/ExpenseTable"
+>>>>>>> 592ff4e ([#18] Settings page)
 
 const Home = props => {
   const { navigation } = props
@@ -13,6 +17,7 @@ const Home = props => {
   const [totalIncome, setTotalIncome] = useState("")
   const [totalExpense, setTotalExpense] = useState("")
   const [totalBalance, setTotalBalance] = useState("")
+  const [averageExpense, setAverageExpense] = useState("")
 
   const [expenses, setExpenes] = useState([])
   const [tag, setTag] = useState([])
@@ -36,6 +41,7 @@ const Home = props => {
         })
 
       dbGetTotalBalance()
+<<<<<<< HEAD
         .then(data => {
           setTotalBalance(data)
         })
@@ -61,7 +67,30 @@ const Home = props => {
 
       // dropTable()
       // dropTableexpense()
+=======
+      .then(data => {
+        setTotalBalance(data)
+        console.log("Data", data)
+      })
+      .catch(err => {
+        console.log("Error", err)
+      })
+
+      dbGetAverageExpense()
+    .then(data => {
+      setAverageExpense(data)
+      console.log("Data", data)
+    })
+    .catch(err => {
+      console.log("Error", err)
+    })
+
+
+>>>>>>> 592ff4e ([#18] Settings page)
     }, [])
+
+    
+    
   )
 
   let tagLabel = []
