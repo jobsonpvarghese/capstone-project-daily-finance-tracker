@@ -105,10 +105,6 @@ const Home = props => {
         </View>
         <Text style={styles.headerP}>Welcome to the Expense tracker dashboard. You can track your expenses here! </Text>
       </View>
-      {/* add a touchable opacity button to drop the table */}
-      <TouchableOpacity onPress={() => dropTableexpense()}>
-        <Text style={styles.bold}>Drop Table</Text>
-      </TouchableOpacity>
       <ScrollView>
         <View style={styles.pieChart}>
           <UIPieChart title="Summary" totalIncome={totalIncome} totalExpense={totalExpense} totalBalance={totalBalance} />

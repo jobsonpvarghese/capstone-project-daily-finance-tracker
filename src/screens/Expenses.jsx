@@ -75,9 +75,6 @@ const Expenses = props => {
     <View style={styles.container}>
       <ScrollView style={form.view}>
         <ExpenseList data={data} tagData={tag} deleteExpense={deleteExpense} navigation={navigation} />
-        <TouchableOpacity onPress={() => dropTableexpense()}>
-        <Text style={styles.bold}>Drop Table</Text>
-      </TouchableOpacity>
       </ScrollView>
 
       <Button

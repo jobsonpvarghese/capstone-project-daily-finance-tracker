@@ -1,20 +1,20 @@
 import React from "react"
-import { StyleSheet, Text, View } from "react-native"
+import { StyleSheet, Text, View, Button } from "react-native"
 
-const Settings = () => {
+const Settings = props => {
+
+  // navigation is a prop passed to this component
+  const { navigation } = props
+
   return (
     <View style={styles.container}>
-      {/* // Make a date picker where it can select the date and time 
-      // Make a button that can change the background of the app
-      
-      // Make a button that can change the theme of the app
-
-      // Make a button that can change the language of the app
-      // Make a button that can change the currency of the app
-      
-      // Make a button that can change the font of the app */}
-      
+      <Button title="Go to Home" onPress={() => navigation.navigate("Home")} />
+      // This button will navigate to the Expenses screen
+      <Button title="Go to Expenses" onPress={() => navigation.navigate("Expenses")} />
+      // to clear the database
+      <Button title="Clear Database" onPress={() => dropTableexpense()} />
     </View>
+
   )
 }
 

@@ -35,51 +35,43 @@ const CategoryAdd = props => {
   }
 
   return (
-    <View style={dashBoard.container}>
-      <Text style={dashBoard.title}>Add Category</Text>
+    <View style={styles.centeredView}>
+    <View style={styles.modalView}>
+      <Text style={styles.modalText}>Add Category</Text>
       <TextInput
-        mode="outlined"
+        style={dashBoard.input}
         label="Category"
         value={task}
         onChangeText={text => setTask(text)}
-        style={dashBoard.input}
       />
 
-<View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <ColorPicker
-              onColorChange={onColorChange}
-              sliderSize={20}
-              sliderOneMaximumValue={255}
-              sliderOneMinimumValue={0}
-              sliderOneStep={1}
-              sliderTwoMaximumValue={255}
-              sliderTwoMinimumValue={0}
-              sliderTwoStep={1}
-              sliderThreeMaximumValue={255}
-              sliderThreeMinimumValue={0}
-              sliderThreeStep={1}
-              initialColor={color}
-              style={{ width: 300, height: 300 }}
-            />
-          </View>
-        </View>
-      <Button
-        mode="contained"
-        style={dashBoard.btnArea}
-        onPress={() => onSubmit()}
-      >
-        <Text style={dashBoard.btnText}>Add</Text>
-      </Button>
+      <ColorPicker
 
-      <Button
-        mode="contained"
-        style={dashBoard.btnAreaCancel}
-        onPress={() => onCancel()}
-      >
-        <Text style={dashBoard.btnText}>Cancel</Text>
-      </Button>
-      </View>
+        onColorChange={onColorChange}
+        onColorSelected={color => alert(`Color selected: ${color}`)}
+        style={{ height: 200, width: 200 }}
+      />
+
+      
+        </View>
+        <View style={dashBoard.btnArea}>
+        <Button
+          style={dashBoard.btn}
+          mode="contained"
+          onPress={onSubmit}
+        >
+          <Text>Add</Text>
+        </Button>
+
+        <Button
+          style={dashBoard.btn}
+          mode="contained"  
+          onPress={onCancel}  
+        >
+          <Text>Cancel</Text> 
+        </Button>
+    </View>
+  </View>
   )
 }
 
@@ -105,11 +97,11 @@ const styles = StyleSheet.create({
     marginTop: 22,
   },
   modalView: {
-    margin: 40,
+    margin: 20,
     backgroundColor: 'white',
     borderRadius: 20,
-    padding: 35,
-    height:385,
+    padding: 15,
+    height:500,
 
     shadowColor: '#000',
     shadowOffset: {
