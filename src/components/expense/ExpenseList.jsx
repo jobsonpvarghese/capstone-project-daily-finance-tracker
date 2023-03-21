@@ -1,35 +1,35 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList } from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList} from "react-native"
 import React from "react"
 import { MaterialCommunityIcons } from "react-native-vector-icons"
 // 
-import { Button, Searchbar, TextInput } from "react-native-paper"
+// import { Button, Searchbar, TextInput } from "react-native-paper"
 // 
 
 const ExpenseList = props => {
   const { data, tagData, deleteExpense, navigation, dateSearch } = props
 
   // 
-  const [searchText, onChangeSearch] = useState('');
-  const [filteredData, setFilteredData] = useState([]);
+  // const [searchText, onChangeSearch] = useState('');
+  // const [filteredData, setFilteredData] = useState([]);
   
-  useEffect(() => {
-    const filtered = data.filter(item =>
-      item.expenseDate.includes(searchText),
-    );
-    if (searchText === '') {
-      return setFilteredData(data);
-    }
+  // useEffect(() => {
+  //   const filtered = data.filter(item =>
+  //     item.expenseDate.includes(searchText),
+  //   );
+  //   if (searchText === '') {
+  //     return setFilteredData(data);
+  //   }
 
-    setFilteredData(filtered);
-  }, [searchText]);
+  //   setFilteredData(filtered);
+  // }, [searchText]);
 
-  const Item = ({expenseDate}) => (
-    <View style={styles.item}>
-      <Text style={styles.expenseDate}>{expenseDate}</Text>
-    </View>
-  );
+  // const Item = ({expenseDate}) => (
+  //   <View style={styles.item}>
+  //     <Text style={styles.expenseDate}>{expenseDate}</Text>
+  //   </View>
+  // );
 
-  const renderItem = ({item}) => <Item title={item.title} />;
+  // const renderItem = ({item}) => <Item title={item.title} />;
   // 
 
   return (
@@ -43,7 +43,7 @@ const ExpenseList = props => {
       }}
     >
         {/*  */}
-          <View>
+          {/* <View>
           <TextInput style = {styles.bar}
               placeholderTextColor='#808080'
               placeholder={'YYYY-MM-DD'}
@@ -57,7 +57,7 @@ const ExpenseList = props => {
                 renderItem={renderItem}
                 keyExtractor={(item, index) => item.key}
               />
-          </View>
+          </View> */}
 
         {/*  */}
 
@@ -173,14 +173,14 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   // 
-  bar: {
-    position: "relative",
-    borderWidth: 0.5,
-    borderRadius: 15,
-    marginHorizontal: 15,
-    marginBottom: 10,
-    marginTop: 60
+//   bar: {
+//     position: "relative",
+//     borderWidth: 0.5,
+//     borderRadius: 15,
+//     marginHorizontal: 15,
+//     marginBottom: 10,
+//     marginTop: 60
     
-}
+// }
 // 
 })
