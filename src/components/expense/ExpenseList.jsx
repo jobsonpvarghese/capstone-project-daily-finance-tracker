@@ -1,9 +1,36 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image } from "react-native"
+import { View, Text, StyleSheet, TouchableOpacity, Image, FlatList } from "react-native"
 import React from "react"
 import { MaterialCommunityIcons } from "react-native-vector-icons"
+// 
+import { Button, Searchbar, TextInput } from "react-native-paper"
+// 
 
 const ExpenseList = props => {
-  const { data, tagData, deleteExpense, navigation } = props
+  const { data, tagData, deleteExpense, navigation, dateSearch } = props
+
+  // 
+  const [searchText, onChangeSearch] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
+  
+  useEffect(() => {
+    const filtered = data.filter(item =>
+      item.expenseDate.includes(searchText),
+    );
+    if (searchText === '') {
+      return setFilteredData(data);
+    }
+
+    setFilteredData(filtered);
+  }, [searchText]);
+
+  const Item = ({expenseDate}) => (
+    <View style={styles.item}>
+      <Text style={styles.expenseDate}>{expenseDate}</Text>
+    </View>
+  );
+
+  const renderItem = ({item}) => <Item title={item.title} />;
+  // 
 
   return (
     <View
@@ -15,6 +42,25 @@ const ExpenseList = props => {
         marginTop: 50
       }}
     >
+        {/*  */}
+          <View>
+          <TextInput style = {styles.bar}
+              placeholderTextColor='#808080'
+              placeholder={'YYYY-MM-DD'}
+              value = {dateSearch} 
+              onChangeText = {newText => onChangeSearch(newText)}      
+              keyboardType={'numeric'}
+            />
+            
+            <FlatList
+                data={filteredData}
+                renderItem={renderItem}
+                keyExtractor={(item, index) => item.key}
+              />
+          </View>
+
+        {/*  */}
+
       {data == "" ? (
         <Text style={styles.noData}>No data available</Text>
       ) : (
@@ -125,5 +171,16 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     alignItems: "center"
-  }
+  },
+  // 
+  bar: {
+    position: "relative",
+    borderWidth: 0.5,
+    borderRadius: 15,
+    marginHorizontal: 15,
+    marginBottom: 10,
+    marginTop: 60
+    
+}
+// 
 })
