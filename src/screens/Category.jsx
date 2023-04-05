@@ -6,7 +6,7 @@ import dashBoard from "../styles/Dashboard"
 import { useFocusEffect } from "@react-navigation/native"
 
 // db functions
-import { dbGetTag, dbInit } from "../database/CategoryTable"
+import { dbGetTag, dbInit,dbDeleteAll } from "../database/CategoryTable";
 
 const Category = props => {
   const { navigation } = props
@@ -47,6 +47,13 @@ const Category = props => {
       <View style={dashBoard.body}>
         <CategoryList data={formData} refreshVal={refreshVal} />
       </View>
+      <Button
+        style={styles.fab}
+        mode="contained"
+        onPress={() => dbDeleteAll }
+      >
+        Delete Category
+      </Button>
       <Button icon="plus" style={styles.fab} mode="contained" onPress={() => navigation.navigate("CategoryAdd")}>
         Add Category
       </Button>
