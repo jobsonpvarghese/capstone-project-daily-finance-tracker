@@ -1,11 +1,13 @@
-import React from "react";
-import { StyleSheet, View, Button, Text, TouchableOpacity } from "react-native";
+import React from "react"
+import { StyleSheet, Text, View, Button } from "react-native"
 import { useTheme } from "../context/ThemeContext";
 
 const Settings = (props) => {
   // navigation is a prop passed to this component
-  const { navigation } = props;
+  const { navigation } = props
   const { isDarkMode, toggleTheme, theme } = useTheme();
+
+  console.log(useTheme())
   const styles = createStyles(theme);
 
   return (
@@ -69,4 +71,4 @@ const createStyles = (theme) =>
     },
   });
 
-export default Settings;
+export default Settings
